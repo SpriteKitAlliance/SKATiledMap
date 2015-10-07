@@ -10,7 +10,27 @@ import Foundation
 
 class SKAObject{
     
-    let frame : SKAFrame
+    /**
+     X position defined by Tiled at creation
+     */
+    let x : Int
+    
+    /**
+     Y position defined by Tiled at creation
+     */
+    let y : Int
+    
+    /**
+     Width defined by Tiled at creation
+     */
+    let width : Int
+    
+    /**
+     Height defined by Tiled at creation
+     */
+    let height : Int
+    
+    
     let objectID : String
     let name : String
     let type : String
@@ -22,15 +42,27 @@ class SKAObject{
     var properties = {}
     
     var center : SKACenter {
-        return SKACenter(x:frame.x+frame.width/2, y: frame.y+frame.height/2)
+        return SKACenter(x:x+width/2, y: y+height/2)
     }
     
-    init(frame :SKAFrame, objectID: String, name: String, type: String){
-        self.frame = frame
-        self.objectID = objectID
+    
+    /**
+     Designated Initializer
+     @param properties the properties that come from the JSON or TMX file
+     */
+    init(properties: [String: AnyObject]){
+        
+        objectID = properties["objectID"] as! String
+        name = properties["name"] as! String
+        type = properties["type"] as! String
+        
+        x = properties["width"] as! Int
+        y = properties["width"] as! Int
+        width = properties["width"] as! Int
+        height = properties["width"] as! Int
+
         self.rotation = 0.0
-        self.name = name
-        self.type = type
+
     }
     
 }

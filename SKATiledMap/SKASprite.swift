@@ -7,7 +7,10 @@
 //
 
 import Foundation
+import SpriteKit
 
-class SKASprite {
+class SKASprite : SKSpriteNode {
+    
+    var properties = [String : AnyObject]()
     
 }

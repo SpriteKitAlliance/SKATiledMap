@@ -10,22 +10,55 @@ import Foundation
 
 class SKAObjectLayer {
     
-    let frame :SKAFrame
+    /**
+     X position defined by Tiled at creation
+     */
+    let x : Int
+    
+    /**
+     Y position defined by Tiled at creation
+     */
+    let y : Int
+    
+    /**
+     Width defined by Tiled at creation
+     */
+    let width : Int
+    
+    /**
+     Height defined by Tiled at creation
+     */
+    let height : Int
+
     var opacity : Float = 0.0
     var visible : Bool = true
     
     let type : String
     var collisionSprites = [SKASprite]()
     
-    var sprites = [[SKASprite]]()
+    /**
+     Array of Sprites based on a 2d grid system may return nil if no sprite for index
+     */
+    var sprites = [[SKASprite?]]()
     
-    init(frame : SKAFrame, type : String)
+    init(properties: [String: AnyObject])
     {
-        self.frame = frame
-        self.type = type
+        type = properties["type"] as! String
         
-        let row = Array(arrayLiteral: SKASprite(), SKASprite(), SKASprite())
-        sprites.append(row)
+        x = properties["width"] as! Int
+        y = properties["width"] as! Int
+        width = properties["width"] as! Int
+        height = properties["width"] as! Int
+    }
+    
+    func sprite(indexX: Int, indexY: Int) -> SKASprite?{
+        if let sprite = sprites[x][y]{
+            return sprite
+        }
+        else
+        {
+            return nil
+        }
     }
     
 }
