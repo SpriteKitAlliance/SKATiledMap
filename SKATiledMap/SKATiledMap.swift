@@ -157,6 +157,67 @@ class SKATiledMap : SKNode{
                 
                     let mainTexture = SKTexture(image: textureImage!)
                     mainTexture.filteringMode = .Nearest
+                    
+                    //working on small texture
+                    let imageWidth = tileSet["imagewidth"] as! Int
+                    let imageHeight = tileSet["imageheight"] as! Int
+                    
+                    let spacing = tileSet["spacing"] as! Int
+                    let margin = tileSet["margin"] as! Int
+                    
+                    let width = imageWidth - (margin * 2)
+                    let height = imageHeight - (margin * 2)
+                    
+                    let tileColumns : Int = Int(ceil(Float(width) / Float(tileWidth + spacing)))
+                    let tileRows : Int = Int(ceil(Float(height) / Float(tileHeight + spacing)))
+                    
+                    let spacingPercentWidth : Float = Float(spacing)/Float(imageWidth)
+                    let spacingPercentHeight : Float = Float(spacing)/Float(imageHeight)
+                    
+                    let marginPercentWidth : Float = Float(margin) / Float(tileWidth)
+                    let marginPercentHeight : Float = Float(margin) / Float(tileHeight)
+                    
+                    let tileWidthPercent : Float = Float (tileWidth) / Float(imageWidth)
+                    let tileHeightPercent : Float = Float (tileHeight) / Float(imageHeight)
+                    
+                    let firstIndex = tileSet["firstgid"] as! Int
+                    var index = firstIndex
+                    
+                    let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
+                    
+                    for var rowID = 0; rowID < tileRows; ++rowID{
+                        
+                        for var columnID = 0; columnID < tileColumns; ++columnID{
+                            print("Row: \(rowID) Column: \(columnID)")
+                            
+                            let x = CGFloat(marginPercentWidth + Float(columnID) * Float(tileWidthPercent + spacingPercentWidth)); // advance based on column
+                            
+                            let yOffset = Float(marginPercentHeight + tileHeightPercent)
+                            let yTileHeight = Float(tileHeightPercent + spacingPercentHeight)
+                            
+                            let y = CGFloat(1.0 - (yOffset + (Float(rowID) * yTileHeight))) //advance based on row
+                            
+                            
+                            let texture = SKTexture(rect: CGRectMake(x, y, CGFloat(tileWidthPercent), CGFloat(tileHeightPercent)), inTexture: mainTexture)
+                            
+                            texture.filteringMode = .Nearest
+                            
+                            let mapTile = SKAMapTile(texture: texture)
+                            
+                            let propertiesKey = String(index-firstIndex)
+                            
+                            if (tilesetProperties != nil) {
+                                
+                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
+                                    mapTile.properties = tileProperties
+                                }
+                                
+                            }
+                            
+                            mapTiles[String(index)] = mapTile
+                            index++;
+                        }
+                    }
 
                 }
                 else
@@ -166,52 +227,13 @@ class SKATiledMap : SKNode{
                 }
                 
                 
-                //working on small texture
-                let imageWidth = tileSet["imagewidth"] as! Int
-                let imageHeight = tileSet["imageheight"] as! Int
-                
-                let spacing = tileSet["spacing"] as! Int
-                let margin = tileSet["margin"] as! Int
-                
-                let width = imageWidth - (margin * 2)
-                let height = imageHeight - (margin * 2)
-                
-                let tileColumns : Int = Int(ceil(Float(width) / Float(tileWidth + spacing)))
-                let tileRows : Int = Int(ceil(Float(height) / Float(tileHeight + spacing)))
-                
-                let spacingPercentWidth : Float = Float(spacing)/Float(imageWidth)
-                let spacingPercentHeight : Float = Float(spacing)/Float(imageHeight)
-                
-                let marginPercentWidth : Float = Float(margin) / Float(tileWidth)
-                let marginPercentHeight : Float = Float(margin) / Float(tileHeight)
-                
-                let tileWidthPercent : Float = Float (tileWidth) / Float(imageWidth)
-                let tileHeightPercent : Float = Float (tileHeight) / Float(imageHeight)
-                
-                var index = tileSet["firstgid"] as! Int
-                
-                for var rowID = 0; rowID < tileRows; ++rowID{
-                    
-                    for var columnID = 0; columnID < tileColumns; ++columnID{
-                        print("Row: \(rowID) Column: \(columnID)")
-
-                    }
-                    
-                }
-                
             }
-           
-            
-            
-    
         }
         
         print(mapProperties)
         
         
     }
-
-    
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

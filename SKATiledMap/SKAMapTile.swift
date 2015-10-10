@@ -15,11 +15,10 @@ import SpriteKit
 class SKAMapTile {
     
     var texture : SKTexture
-    var properties : [String : AnyObject]
+    var properties : [String : AnyObject]?
     
-    init (texture : SKTexture, properties : [String : AnyObject])
+    init (texture : SKTexture)
     {
         self.texture = texture
-        self.properties = properties
     }
 }
