@@ -27,6 +27,8 @@ class GameViewController: UIViewController {
         scene.scaleMode = .AspectFill
         
         skView.presentScene(scene)
+        
+        let map = SKATiledMap(mapName: "SampleMapKenny")
     }
 
     override func shouldAutorotate() -> Bool {

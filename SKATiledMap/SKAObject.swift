@@ -40,10 +40,7 @@ class SKAObject{
     var visible = true
     
     var properties = {}
-    
-    var center : SKACenter {
-        return SKACenter(x:x+width/2, y: y+height/2)
-    }
+
     
     
     /**
