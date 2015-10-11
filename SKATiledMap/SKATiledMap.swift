@@ -422,8 +422,10 @@ class SKATiledMap : SKNode{
         return [SKASprite]()
     }
     
-    func sprite(layer : Int, x : Int, y : Int) -> SKASprite{
-        return SKASprite()
+    func sprite(layerNumber : Int, x : Int, y : Int) -> SKASprite{
+        let layer = spriteLayers[layerNumber]
+        let sprite = layer.sprites[x][y]
+        return sprite!
     }
     
 }

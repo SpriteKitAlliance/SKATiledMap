@@ -11,6 +11,7 @@
 		B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4E1BCA146A004DFE4D /* platforms.atlas */; settings = {ASSET_TAGS = (); }; };
 		B637FE531BCA146A004DFE4D /* misc.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4F1BCA146A004DFE4D /* misc.atlas */; settings = {ASSET_TAGS = (); }; };
 		B637FE541BCA146A004DFE4D /* items.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE501BCA146A004DFE4D /* items.atlas */; settings = {ASSET_TAGS = (); }; };
+		B637FE571BCABA5A004DFE4D /* SKATestHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637FE561BCABA5A004DFE4D /* SKATestHud.swift */; settings = {ASSET_TAGS = (); }; };
 		B6DEDE431BC3467B000BABCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE421BC3467B000BABCD /* AppDelegate.swift */; };
 		B6DEDE471BC3467B000BABCD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE461BC3467B000BABCD /* GameScene.swift */; };
 		B6DEDE491BC3467B000BABCD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE481BC3467B000BABCD /* GameViewController.swift */; };
@@ -32,6 +33,7 @@
 		B637FE4E1BCA146A004DFE4D /* platforms.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = platforms.atlas; sourceTree = "<group>"; };
 		B637FE4F1BCA146A004DFE4D /* misc.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = misc.atlas; sourceTree = "<group>"; };
 		B637FE501BCA146A004DFE4D /* items.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = items.atlas; sourceTree = "<group>"; };
+		B637FE561BCABA5A004DFE4D /* SKATestHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKATestHud.swift; sourceTree = "<group>"; };
 		B6DEDE3F1BC3467B000BABCD /* SKATiledMapExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKATiledMapExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DEDE421BC3467B000BABCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DEDE461BC3467B000BABCD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				B6DEDE671BC3F316000BABCD /* SKATiledMap */,
 				B6DEDE421BC3467B000BABCD /* AppDelegate.swift */,
 				B6DEDE461BC3467B000BABCD /* GameScene.swift */,
+				B637FE561BCABA5A004DFE4D /* SKATestHud.swift */,
 				B6DEDE481BC3467B000BABCD /* GameViewController.swift */,
 				B6DEDEBE1BC8C240000BABCD /* Resources */,
 				B6DEDE4A1BC3467B000BABCD /* Main.storyboard */,
@@ -103,17 +106,9 @@
 				B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */,
 				B6DEDE681BC3F316000BABCD /* SKACollisionDefine.swift */,
 				B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */,
-				B6DEDE6E1BC3F316000BABCD /* Utilities */,
 			);
 			path = SKATiledMap;
 			sourceTree = SOURCE_ROOT;
-		};
-		B6DEDE6E1BC3F316000BABCD /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
-			sourceTree = "<group>";
 		};
 		B6DEDEBE1BC8C240000BABCD /* Resources */ = {
 			isa = PBXGroup;
@@ -209,6 +204,7 @@
 				B6DEDE731BC3F316000BABCD /* SKASpriteLayer.swift in Sources */,
 				B6DEDE711BC3F316000BABCD /* SKAObjectLayer.swift in Sources */,
 				B6DEDEC21BC94E1F000BABCD /* SKAMapTile.swift in Sources */,
+				B637FE571BCABA5A004DFE4D /* SKATestHud.swift in Sources */,
 				B6DEDE721BC3F316000BABCD /* SKASprite.swift in Sources */,
 				B6DEDE701BC3F316000BABCD /* SKAObject.swift in Sources */,
 				B6DEDE491BC3467B000BABCD /* GameViewController.swift in Sources */,
