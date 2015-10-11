@@ -48,7 +48,7 @@ class SKATiledMap : SKNode{
     /**
      Culling
      */
-    
+
     var culledBefore = false
     var visibleArray = [SKASprite]()
     var lastY = 0
@@ -72,12 +72,12 @@ class SKATiledMap : SKNode{
     func loadFile(fileName: String)
     {
         if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "tmx"){
-            print(filePath)
+            print("Sorry TMX files are not supported yet \(filePath)")
+            return
         }
         else
         {
             if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "json"){
-                print(filePath)
                 mapDictionaryForJSONFile(filePath)
             }
 
@@ -110,7 +110,6 @@ class SKATiledMap : SKNode{
     
     
     func loadMap(mapDictionary : [String : AnyObject]){
-        print("test")
 
         mapProperties = mapDictionary["properties"] as! [String : AnyObject]
         
@@ -146,7 +145,6 @@ class SKATiledMap : SKNode{
                 }
                 else
                 {
-                    print("Image: \(component) not found in bundle. Trying file path")
                     if let filePath = NSBundle.mainBundle().pathForResource(imageName, ofType: imageExtension){
                         
                         textureImage = UIImage(contentsOfFile: filePath)
@@ -190,7 +188,6 @@ class SKATiledMap : SKNode{
                     for var rowID = 0; rowID < tileRows; ++rowID{
                         
                         for var columnID = 0; columnID < tileColumns; ++columnID{
-                            print("Row: \(rowID) Column: \(columnID)")
                             
                             let x = CGFloat(marginPercentWidth + Float(columnID) * Float(tileWidthPercent + spacingPercentWidth)); // advance based on column
                             
@@ -236,8 +233,6 @@ class SKATiledMap : SKNode{
 
                 for (key, spriteDict) in collectionTiles{
                     
-                    print(spriteDict)
-                    
                     if let dict = spriteDict as? [String : AnyObject]{
                         
                         var imageName : NSString?
@@ -245,13 +240,11 @@ class SKATiledMap : SKNode{
                         if let imagePath = dict["image"] as? NSString{
                             
                             imageName = imagePath.lastPathComponent
-                            print(imageName)
                         }
                         
                         if let imagePath = dict["source"] as? NSString{
                             
                             imageName = imagePath.lastPathComponent
-                            print(imageName)
                         }
                         
                         if (imageName != nil) {
@@ -351,10 +344,6 @@ class SKATiledMap : SKNode{
                                     }
                                     
                                     sprites[columnIndex][rowIndex] = sprite
-                                    
-                                    
-                                    print(sprite)
-                                    
                                 }
                             }
                         }
@@ -415,10 +404,6 @@ class SKATiledMap : SKNode{
                 }
             }
         }
-        
-        print(self)
-        
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
