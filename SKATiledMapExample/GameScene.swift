@@ -31,7 +31,7 @@ class GameScene: SKScene {
         let rotate = SKAction.rotateByAngle(2, duration: 1)
         let repeatRotation = SKAction.repeatActionForever(rotate)
         
-        let sprite = map.sprite(2, x: 5, y: 4)
+        let sprite = map.spriteFor(2, x: 5, y: 4)
         sprite.runAction(repeatRotation)
         
         //adding test player
@@ -56,5 +56,10 @@ class GameScene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         map.update()
         player.update()
+        
+        //cropping feature update
+        let playerIndex = map.index(player.position)
+        map.cullAround(Int(playerIndex.x), y: Int(playerIndex.y), width: 5, height: 5)
+
     }
 }

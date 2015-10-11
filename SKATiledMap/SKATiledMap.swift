@@ -301,11 +301,11 @@ class SKATiledMap : SKNode{
                             rowArray.append(row)
                         }
                         
-                        var sprites = [[SKASprite?]]()
+                        var sprites = [[SKASprite]]()
                         
                         for var i = 0; i < self.mapWidth; ++i{
                             
-                            var column = [SKASprite?]()
+                            var column = [SKASprite]()
                             for var j = 0; j < self.mapHeight; ++j{
                                 column.append(SKASprite())
                             }
@@ -446,27 +446,156 @@ class SKATiledMap : SKNode{
             position = tempPosition
         }
     }
+    
+    func cullAround(x : Int, y : Int, width : Int, height : Int){
+        
+        if(!culledBefore)
+        {
+            for var layerIndex = 0; layerIndex < spriteLayers.count; ++layerIndex{
+                for var xIndex = 0; xIndex < mapWidth; ++xIndex{
+                    for var yIndex = 0; yIndex < mapHeight; ++yIndex{
+                        let sprite = spriteFor(layerIndex, x: xIndex, y: yIndex)
+                        sprite.hidden = true
+                    }
+                }
+            }
+        }
+        
+        if(lastX != x || lastY != y || lastWidth != width || lastHeight != height){
+            
+            for vSprite in visibleArray{
+                vSprite.hidden = true
+            }
+            
+            // calculate what to make visiable
+            visibleArray = [SKASprite]()
+            
+            var startingX = x - width / 2
+            var startingY = y - height / 2
+            var endingX = startingX + width
+            var endingY = startingY + height
+            
+            if(startingX < 0){
+                startingX = 0
+                endingX = width
+            }
+            
+            if(startingY < 0){
+                startingY = 0
+                endingY = height
+            }
+            
+            if(endingX >= mapWidth){
+                endingX = mapWidth
+                startingX = endingX - width
+            }
+            
+            if (endingY >= mapHeight){
+                endingY = mapHeight
+                startingY = endingY - height
+            }
+            
+            if(startingX < 0){
+                startingX = 0
+            }
+            
+            if(startingY < 0){
+                startingY = 0
+            }
+            
+            if(endingX < 0){
+                endingX = 0
+            }
+            
+            if(endingY < 0){
+                endingY = 0
+            }
+            
+            for var layerIndex = 0; layerIndex < spriteLayers.count; ++layerIndex{
+                for var xIndex = startingX; xIndex < endingX; ++xIndex{
+                    for var yIndex = startingY; yIndex < endingY; ++yIndex{
+                        let sprite = spriteFor(layerIndex, x: xIndex, y: yIndex)
+                        sprite.hidden = false
+                        visibleArray.append(sprite)
+                    }
+                }
+            }
+            
+            lastX = x
+            lastY = y
+            lastWidth = width
+            lastHeight = height
+            
+            culledBefore = true
+            
+        }
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func index(point : CGPoint){
+    func index(point : CGPoint) -> CGPoint{
+        let x = Int(point.x)/tileWidth
+        let y = Int(point.y)/tileHeight
+        return CGPointMake(CGFloat(x), CGFloat(y));
+    }
+    
+    func tilesAround(point : CGPoint, layerNumber : Int)-> [SKASprite?]{
         
+        let x = Int(point.x)
+        let y = Int(point.y)
+        
+        var tiles = [SKASprite]()
+        
+        let layer = spriteLayers[layerNumber]
+        
+        if (x - 1 > 0){
+            
+            tiles.append(layer.sprites[x-1][y])
+            
+            if(y - 1 >= 0){
+                tiles.append(layer.sprites[x-1][y-1])
+            }
+            
+            if(y + 1 < self.mapHeight){
+                tiles.append(layer.sprites[x-1][y+1])
+            }
+        }
+        
+        if (x + 1 < self.mapWidth){
+            
+            tiles.append(layer.sprites[x+1][y])
+            
+            if(y + 1 < self.mapHeight){
+                tiles.append(layer.sprites[x+1][y+1])
+            }
+            
+            if(y - 1 >= 0){
+                tiles.append(layer.sprites[x+1][y-1])
+            }
+        }
+        
+        if (y - 1 >= 0)
+        {
+            tiles.append(layer.sprites[x][y-1])
+        }
+        
+        if (y + 1 < mapHeight){
+            tiles.append(layer.sprites[x][y+1])
+        }
+        
+        return tiles
     }
     
-    func tilesAround(point : CGPoint)-> [SKASprite?]{
-        return [SKASprite]()
-    }
+//    func tileAround(index : CGPoint) -> [SKASprite?]{
+//        return [SKASprite]()
+//    }
     
-    func tileAround(index : CGPoint) -> [SKASprite?]{
-        return [SKASprite]()
-    }
-    
-    func sprite(layerNumber : Int, x : Int, y : Int) -> SKASprite{
+    func spriteFor(layerNumber : Int, x : Int, y : Int) -> SKASprite{
         let layer = spriteLayers[layerNumber]
         let sprite = layer.sprites[x][y]
-        return sprite!
+        return sprite
     }
     
 }

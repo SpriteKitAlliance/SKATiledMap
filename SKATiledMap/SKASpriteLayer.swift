@@ -37,7 +37,7 @@ class SKASpriteLayer : SKNode {
     var type : String
     var collisionSprites = [SKASprite]()
     
-    var sprites = [[SKASprite?]]()
+    var sprites = [[SKASprite]]()
 
     
     init(properties: [String: AnyObject]){
