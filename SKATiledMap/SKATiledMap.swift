@@ -9,6 +9,12 @@
 import Foundation
 import SpriteKit
 
+enum SKAColliderType: UInt32 {
+    case Player = 1
+    case Floor = 2
+    case Wall = 4
+}
+
 class SKATiledMap : SKNode{
 
     /**
@@ -330,8 +336,8 @@ class SKATiledMap : SKNode{
                                             if collisionType == "SKACollisionTypeRect"{
                                                 sprite.physicsBody = SKPhysicsBody(rectangleOfSize: sprite.size)
                                                 sprite.physicsBody!.dynamic = false
-//                                                sprite.physicsBody.categoryBitMask = SKACategoryFloor;
-//                                                sprite.physicsBody.contactTestBitMask = SKACategoryPlayer;
+                                                sprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                                sprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
                                                 sprite.zPosition = 20;
                                             }
                                         }
@@ -383,8 +389,8 @@ class SKATiledMap : SKNode{
                                             floorSprite.position = CGPointMake(centerX, centerY)
                                             floorSprite.physicsBody = SKPhysicsBody(rectangleOfSize: floorSprite.size)
                                             floorSprite.physicsBody?.dynamic = false
-                                            //floorSprite.physicsBody.categoryBitMask = SKACategoryFloor;
-                                            //floorSprite.physicsBody.contactTestBitMask = SKACategoryPlayer;
+                                            floorSprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                            floorSprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
                                             addChild(floorSprite)
                                             collisionSprites.append(floorSprite)
                                         }

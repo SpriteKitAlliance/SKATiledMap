@@ -10,9 +10,13 @@ import Foundation
 import SpriteKit
 
 class SKATestHud : SKNode {
-   
-    init(scene : SKScene, player : SKNode){
     
+    let player : SKATestPlayer
+   
+    init(scene : SKScene, player : SKATestPlayer){
+    
+        self.player = player
+        
         super.init()
         
         userInteractionEnabled = true
@@ -49,7 +53,44 @@ class SKATestHud : SKNode {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first
         let sprite = nodeAtPoint((touch?.locationInNode(self))!)
-        print(sprite.name)
+        
+        if let spriteName = sprite.name {
+            
+            switch spriteName{
+                
+                case "leftButton":
+                    player.playerState = .Left
+                break
+                
+                case "rightButton":
+                    player.playerState = .Right
+                break
+                
+                case "jumpButton" :
+                    player.wantsToJump = true
+                break
+                
+                default :
+               
+                break
+            }
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch = touches.first
+        let sprite = nodeAtPoint((touch?.locationInNode(self))!)
+        
+        if let spriteName = sprite.name {
+        
+            if (spriteName == "leftButton" && player.playerState == .Left){
+                player.playerState = .Idel
+            }
+            
+            if (spriteName == "rightButton" && player.playerState == .Right){
+                player.playerState = .Idel
+            }
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

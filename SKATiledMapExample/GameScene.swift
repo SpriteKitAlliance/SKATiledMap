@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    let player = SKATestPlayer(color: UIColor.blueColor(), size: CGSizeMake(40, 80))
+    
     override func didMoveToView(view: SKView) {
         
         let map = SKATiledMap(mapName: "SampleMapKenny")
@@ -32,7 +34,14 @@ class GameScene: SKScene {
         let sprite = map.sprite(2, x: 5, y: 4)
         sprite.runAction(repeatRotation)
         
-        let hud = SKATestHud(scene: self, player: SKSpriteNode())
+        //adding test player
+        player.zPosition = 20
+        player.position = CGPointMake(400, 400);
+        
+        map.autoFollowNode = player;
+        map.addChild(player)
+        
+        let hud = SKATestHud(scene: self, player: player)
         addChild(hud)
         
         
@@ -45,6 +54,6 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+        player.update()
     }
 }
