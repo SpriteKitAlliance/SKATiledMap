@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SpriteKit
 
-class SKASpriteLayer {
+class SKASpriteLayer : SKNode {
     
     /**
     X position defined by Tiled at creation
@@ -35,19 +36,27 @@ class SKASpriteLayer {
     
     var type : String
     var collisionSprites = [SKASprite]()
+    
+    var sprites = [[SKASprite?]]()
 
     
     init(properties: [String: AnyObject]){
         
         type = properties["type"] as! String
         
-        x = properties["width"] as! Int
-        y = properties["width"] as! Int
+        x = properties["x"] as! Int
+        y = properties["y"] as! Int
         width = properties["width"] as! Int
         height = properties["width"] as! Int
         
 //        self.rotation = 0.0
         
+        super.init()
+        
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 

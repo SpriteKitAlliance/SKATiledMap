@@ -18,7 +18,7 @@ class SKAObject{
     /**
      Y position defined by Tiled at creation
      */
-    let y : Int
+    var y : Int
     
     /**
      Width defined by Tiled at creation
@@ -39,7 +39,7 @@ class SKAObject{
     
     var visible = true
     
-    var properties = {}
+    var properties : [String : AnyObject]?
 
     
     
@@ -48,15 +48,17 @@ class SKAObject{
      @param properties the properties that come from the JSON or TMX file
      */
     init(properties: [String: AnyObject]){
-        
-        objectID = properties["objectID"] as! String
+        objectID = "0"
+//        objectID = properties["objectID"] as! String
         name = properties["name"] as! String
         type = properties["type"] as! String
         
-        x = properties["width"] as! Int
-        y = properties["width"] as! Int
+        x = properties["x"] as! Int
+        y = properties["y"] as! Int
         width = properties["width"] as! Int
-        height = properties["width"] as! Int
+        height = properties["height"] as! Int
+        
+        self.properties = properties["properties"] as? [String : AnyObject]
 
         self.rotation = 0.0
 

@@ -11,6 +11,6 @@ import SpriteKit
 
 class SKASprite : SKSpriteNode {
     
-    var properties = [String : AnyObject]()
+    var properties : [String : AnyObject]?
     
 }

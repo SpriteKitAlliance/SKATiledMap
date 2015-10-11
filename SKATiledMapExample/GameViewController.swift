@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
-            
+        skView.showsPhysics = true
         skView.ignoresSiblingOrder = true
             
         /* Set the scale mode to scale to fit the window */
@@ -28,7 +28,6 @@ class GameViewController: UIViewController {
         
         skView.presentScene(scene)
         
-        let map = SKATiledMap(mapName: "SampleMapKenny")
     }
 
     override func shouldAutorotate() -> Bool {

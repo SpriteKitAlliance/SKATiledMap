@@ -30,35 +30,32 @@ class SKAObjectLayer {
      */
     let height : Int
 
-    var opacity : Float = 0.0
-    var visible : Bool = true
+    let opacity : Float
+    let visible : Bool
     
     let type : String
-    var collisionSprites = [SKASprite]()
+    let name : String
     
+    var collisionSprites = [SKASprite]()
+    var objects = [SKAObject]()
+
     /**
      Array of Sprites based on a 2d grid system may return nil if no sprite for index
      */
-    var sprites = [[SKASprite?]]()
+    let drawOrder : String
     
     init(properties: [String: AnyObject])
     {
         type = properties["type"] as! String
         
-        x = properties["width"] as! Int
-        y = properties["width"] as! Int
+        x = properties["x"] as! Int
+        y = properties["y"] as! Int
         width = properties["width"] as! Int
-        height = properties["width"] as! Int
-    }
-    
-    func sprite(indexX: Int, indexY: Int) -> SKASprite?{
-        if let sprite = sprites[x][y]{
-            return sprite
-        }
-        else
-        {
-            return nil
-        }
+        height = properties["height"] as! Int
+        opacity = properties["opacity"] as! Float
+        name = properties["name"] as! String
+        visible = properties["visible"] as! Bool
+        drawOrder = properties["draworder"] as! String
     }
     
 }

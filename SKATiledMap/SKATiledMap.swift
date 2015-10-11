@@ -125,8 +125,10 @@ class SKATiledMap : SKNode{
         
         for (_, element) in tileSets.enumerate() {
             
+
             let tileSet = element as! [String : AnyObject]
-            
+            let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
+
             let tileWidth = tileSet["tilewidth"] as! Int
             let tileHeight = tileSet["tileheight"] as! Int
             
@@ -225,12 +227,196 @@ class SKATiledMap : SKNode{
                     print("It appears Image:\(component) is missing")
                     return;
                 }
+            }
+            
+            if let collectionTiles = tileSet["tiles"] as? [String : AnyObject]
+            {
                 
-                
+                let firstIndex = tileSet["firstgid"] as! Int
+
+                for (key, spriteDict) in collectionTiles{
+                    
+                    print(spriteDict)
+                    
+                    if let dict = spriteDict as? [String : AnyObject]{
+                        
+                        var imageName : NSString?
+                        
+                        if let imagePath = dict["image"] as? NSString{
+                            
+                            imageName = imagePath.lastPathComponent
+                            print(imageName)
+                        }
+                        
+                        if let imagePath = dict["source"] as? NSString{
+                            
+                            imageName = imagePath.lastPathComponent
+                            print(imageName)
+                        }
+                        
+                        if (imageName != nil) {
+                            let texture = SKTexture(imageNamed: (imageName?.stringByDeletingPathExtension)!)
+                            texture.filteringMode = .Nearest
+                            
+                            let index = Int(key)! + firstIndex
+                            
+                            let propertiesKey = String(firstIndex-index)
+                            
+                            let mapTile = SKAMapTile(texture: texture)
+                            
+                            if (tilesetProperties != nil) {
+                                
+                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
+                                    mapTile.properties = tileProperties
+                                }
+                                
+                            }
+                            
+                            mapTiles[String(index)] = mapTile
+                        }
+                    }
+                }
             }
         }
         
-        print(mapProperties)
+        var layerNumber = 0
+        
+        if let layers = mapDictionary["layers"] as? [AnyObject]{
+            
+            for layer  in layers {
+                
+                if let layerDictionary = layer as? [String : AnyObject] {
+                    if let tileIDs = layerDictionary["data"] as? [Int]{
+                    
+                        let spriteLayer = SKASpriteLayer(properties: layerDictionary)
+                        
+                        var rowArray = [[Int]]()
+                        
+                        var rangeStart = 0
+                        let rangeLength = mapWidth-1
+                        
+                        for var index = 0; index < mapHeight; ++index{
+                            rangeStart = tileIDs.count - ((index + 1) * mapWidth )
+                            
+                            let row : [Int] = Array(tileIDs[rangeStart...rangeStart+rangeLength])
+                            rowArray.append(row)
+                        }
+                        
+                        var sprites = [[SKASprite?]]()
+                        
+                        for var i = 0; i < self.mapWidth; ++i{
+                            
+                            var column = [SKASprite?]()
+                            for var j = 0; j < self.mapHeight; ++j{
+                                column.append(SKASprite())
+                            }
+                            
+                            sprites.append(column)
+                        }
+                        
+                        //adding sprites
+                        for (rowIndex, row) in rowArray.enumerate(){
+                            
+                            for (columnIndex, number) in row.enumerate(){
+                                let key = String(number)
+                                if let mapTile = mapTiles[key]{
+                                    
+                                    let sprite = SKASprite(texture: mapTile.texture)
+                                    
+                                    //positioning
+                                    let xOffset = Int(tileWidth / 2)
+                                    let yOffset = Int(tileHeight / 2)
+                                    let x = (Int(sprite.size.width / 2) - xOffset) + xOffset + columnIndex * tileWidth
+                                    let y = (Int(sprite.size.height / 2) - yOffset) + yOffset + rowIndex * tileHeight
+                                    sprite.position = CGPointMake(CGFloat(x), CGFloat(y))
+                                    
+                                    sprite.properties = mapTile.properties
+                                    
+                                    if  let properties = sprite.properties{
+                                        if let collisionType = properties["SKACollsionType"]! as? String{
+                                            if collisionType == "SKACollisionTypeRect"{
+                                                sprite.physicsBody = SKPhysicsBody(rectangleOfSize: sprite.size)
+                                                sprite.physicsBody!.dynamic = false
+//                                                sprite.physicsBody.categoryBitMask = SKACategoryFloor;
+//                                                sprite.physicsBody.contactTestBitMask = SKACategoryPlayer;
+                                                sprite.zPosition = 20;
+                                            }
+                                        }
+                                    }
+                                    
+                                    spriteLayer.addChild(sprite)
+                                    
+                                    if(!spriteLayer.visible){
+                                        sprite.hidden = true
+                                    }
+                                    
+                                    sprites[columnIndex][rowIndex] = sprite
+                                    
+                                    
+                                    print(sprite)
+                                    
+                                }
+                            }
+                        }
+                        
+                        spriteLayer.sprites = sprites
+                        spriteLayer.zPosition = CGFloat(layerNumber)
+                        addChild(spriteLayer)
+                        spriteLayers.append(spriteLayer)
+                        
+                        layerNumber++
+                    }
+                    if let objectsArray = layerDictionary["objects"] as? [AnyObject]{
+                        
+                        let objectLayer = SKAObjectLayer(properties: layerDictionary)
+                        var collisionSprites = [SKASprite]()
+                        var objects = [SKAObject]()
+                        
+                        for objectDictionary in objectsArray{
+                            
+                            if let properties = objectDictionary as? [String : AnyObject]{
+                                
+                                let object = SKAObject(properties: properties)
+                                
+                                if(objectLayer.drawOrder == "topdown")
+                                {
+                                    object.y = (mapHeight * tileHeight) - object.y - object.height;
+                                }
+                                
+                                if let objectProperties = object.properties{
+                                    if let collisionType = objectProperties["SKACollisionType"] as? String{
+                                        if collisionType == "SKACollisionTypeRect"{
+                                            
+                                            let floorSprite = SKASprite(color: SKColor.clearColor(), size: CGSizeMake(CGFloat(object.width), CGFloat(object.height)))
+                                            floorSprite.zPosition = CGFloat(layerNumber)
+                                            let centerX = CGFloat(object.x+object.width/2)
+                                            let centerY = CGFloat(object.y+object.height/2)
+                                            floorSprite.position = CGPointMake(centerX, centerY)
+                                            floorSprite.physicsBody = SKPhysicsBody(rectangleOfSize: floorSprite.size)
+                                            floorSprite.physicsBody?.dynamic = false
+                                            //floorSprite.physicsBody.categoryBitMask = SKACategoryFloor;
+                                            //floorSprite.physicsBody.contactTestBitMask = SKACategoryPlayer;
+                                            addChild(floorSprite)
+                                            collisionSprites.append(floorSprite)
+                                        }
+                                    }
+                                }
+                                
+                                objects.append(object)
+                            }
+                        }
+                        
+                        objectLayer.collisionSprites = collisionSprites;
+                        
+                        objectLayer.objects = objects;
+                        objectLayers.append(objectLayer)
+                        layerNumber++;
+                    }
+                }
+            }
+        }
+        
+        print(self)
         
         
     }

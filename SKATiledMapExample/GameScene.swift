@@ -11,7 +11,8 @@ import SpriteKit
 class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
-       
+        let map = SKATiledMap(mapName: "SampleMapKenny")
+        self .addChild(map)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
