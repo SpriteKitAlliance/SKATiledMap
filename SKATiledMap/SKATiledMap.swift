@@ -411,6 +411,41 @@ class SKATiledMap : SKNode{
             }
         }
     }
+    
+    func update(){
+        
+        if (autoFollowNode != nil && scene?.view != nil)
+        {
+            position = CGPointMake(
+                -autoFollowNode!.position.x + scene!.size.width / 2,
+                -autoFollowNode!.position.y + scene!.size.height / 2);
+            
+            /*
+            * Check position of the minimap and stop it from going off screen
+            */
+            var tempPosition = position;
+            
+            if(tempPosition.x > 0)
+            {
+                tempPosition.x = 0;
+            }
+            
+            if(tempPosition.y > 0)
+            {
+                tempPosition.y = 0;
+            }
+            
+            if(tempPosition.y < -CGFloat(mapHeight * tileHeight) + scene!.size.height){
+                tempPosition.y = -CGFloat(mapHeight * tileHeight) + scene!.size.height
+            }
+            if(tempPosition.x < -CGFloat(mapWidth * tileWidth) + scene!.size.width){
+                tempPosition.x = -CGFloat(mapWidth * tileWidth) + scene!.size.width
+            }
+            
+            //shound round to whole numbers
+            position = tempPosition
+        }
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

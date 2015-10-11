@@ -11,10 +11,10 @@ import SpriteKit
 class GameScene: SKScene {
     
     let player = SKATestPlayer(color: UIColor.blueColor(), size: CGSizeMake(40, 80))
+    let map = SKATiledMap(mapName: "SampleMapKenny")
     
     override func didMoveToView(view: SKView) {
         
-        let map = SKATiledMap(mapName: "SampleMapKenny")
         addChild(map)
     
         //showing ease of adding actions to a layer
@@ -54,6 +54,7 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
+        map.update()
         player.update()
     }
 }
