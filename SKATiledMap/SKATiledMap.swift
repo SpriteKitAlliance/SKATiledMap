@@ -9,6 +9,9 @@
 import Foundation
 import SpriteKit
 
+/**
+ Enum used to define collision for auto generated physics feature
+*/
 enum SKAColliderType: UInt32 {
     case Player = 1
     case Floor = 2
@@ -47,14 +50,19 @@ class SKATiledMap : SKNode{
      */
     var objectLayers = [SKAObjectLayer]()
 
+    /**
+     Additional properties found on the map
+     */
     var mapProperties = [String : AnyObject]()
     
+    /**
+     Used for moving the map based on the position of a child node
+     */
     var autoFollowNode : SKNode?
     
     /**
-     Culling
+     Culling logic
      */
-
     var culledBefore = false
     var visibleArray = [SKASprite]()
     var lastY = 0
@@ -62,6 +70,10 @@ class SKATiledMap : SKNode{
     var lastWidth = 0
     var lastHeight = 0
     
+    /**
+     Designated Initializer
+     @param mapName name of the map you want. No need for file extension
+     */
     init(mapName: String){
         
         mapWidth = 0
@@ -72,17 +84,23 @@ class SKATiledMap : SKNode{
         super.init()
         
         loadFile(mapName)
-        
     }
     
+    /**
+     Looks for tmx or json file based on a map name and loads map data
+     @param fileName the name of the map without a file extension
+     */
     func loadFile(fileName: String)
     {
+        //checks for tmx first then trys json if a tmx file can not be found
         if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "tmx"){
+            //currently tmx files are not supported but will be in the near future
             print("Sorry TMX files are not supported yet \(filePath)")
             return
         }
         else
         {
+            //looks for tmx file
             if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "json"){
                 mapDictionaryForJSONFile(filePath)
             }
@@ -90,8 +108,13 @@ class SKATiledMap : SKNode{
         }
     }
     
+    /**
+     Creates the key value pair needed for map creation based on json file
+     @param filePath the path to the JSON file
+     */
     func mapDictionaryForJSONFile(filePath : String){
         
+        //attemps to return convert json file over to a key value pairs
         do{
             let JSONData = try NSData(contentsOfFile: filePath, options: .DataReadingMappedIfSafe)
             
@@ -103,30 +126,64 @@ class SKATiledMap : SKNode{
                 }
                 catch
                 {
-                    
+                    print("Unable to convert \(filePath) to a key value object")
                 }
             }
-
         }
         catch
         {
-            
+            print("Unable to load \(filePath) as NSData")
         }
     }
     
-    
-    func loadMap(mapDictionary : [String : AnyObject]){
+    // MARK: - private class functions
+    /**
+     Generates a map based on pre determined keys and values
+     @param mapDictionary the key value set that originated from a tmx or json file
+     */
+    private func loadMap(mapDictionary : [String : AnyObject]){
 
+        //getting additional user generated properties for map
+        guard let _ = mapDictionary["properties"] as? [String : AnyObject] else {
+            print("Error: Map is missing properties values")
+            return
+        }
         mapProperties = mapDictionary["properties"] as! [String : AnyObject]
         
+        //getting value that determines how many tiles wide the map is
+        guard let _ = mapDictionary["width"] as? Int else {
+            print("Error: Map is missing width value")
+            return
+        }
         mapWidth = mapDictionary["width"] as! Int
+        
+        //getting value that determines how many tiles tall a map is
+        guard let _ = mapDictionary["height"] as? Int else {
+            print("Error: Map is missing height value")
+            return
+        }
         mapHeight = mapDictionary["height"] as! Int
+        
+        //getting value that determines the width of a tile
+        guard let _ = mapDictionary["tilewidth"] as? Int else {
+            print("Error: Map is missing width value")
+            return
+        }
         tileWidth = mapDictionary["tilewidth"] as! Int
+        
+        //getting value that determines the height of a tile
+        guard let _ = mapDictionary["tileheight"] as? Int else {
+            print("Error: Map is missing width value")
+            return
+        }
         tileHeight = mapDictionary["tileheight"] as! Int
         
         var mapTiles = [String : SKAMapTile]()
         
-        let tileSets = mapDictionary["tilesets"] as! [AnyObject]
+        guard let tileSets = mapDictionary["tilesets"] as? [AnyObject] else{
+            print("Map is missing tile sets to generate map")
+            return
+        }
         
         for (_, element) in tileSets.enumerate() {
             
@@ -412,6 +469,9 @@ class SKATiledMap : SKNode{
         }
     }
     
+    /**
+     Used to update map position if autoFollowNode is set
+     */
     func update(){
         
         if (autoFollowNode != nil && scene?.view != nil)
@@ -447,6 +507,14 @@ class SKATiledMap : SKNode{
         }
     }
     
+    /**
+     Culling "hiding" nodes that do not need to be rendered greatly improves performace and frame rate.
+     This method is optimized to be called every update loop
+     @param x the center x index you wish to cull around
+     @param y the center y index you wish to cull around
+     @param width the number of tiles wide you would like to keep
+     @param height the number of tiles high you would like to keep
+     */
     func cullAround(x : Int, y : Int, width : Int, height : Int){
         
         if(!culledBefore)
@@ -531,20 +599,26 @@ class SKATiledMap : SKNode{
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    /**
+     Returns a CGPoint that can be used as an x and y index
+     @param point the point in which to calculate the index
+     */
     func index(point : CGPoint) -> CGPoint{
         let x = Int(point.x)/tileWidth
         let y = Int(point.y)/tileHeight
         return CGPointMake(CGFloat(x), CGFloat(y));
     }
     
-    func tilesAround(point : CGPoint, layerNumber : Int)-> [SKASprite?]{
+    /**
+     Returns all the tiles around a specific index for a specific point. Very useful if you need to know
+     about tiles around a specific index.
+     @param index the CGPoint that will be used as a x and y index
+     @param layerNumber the layer in which you would like your tiles
+     */
+    func tilesAround(index : CGPoint, layerNumber : Int)-> [SKASprite?]{
         
-        let x = Int(point.x)
-        let y = Int(point.y)
+        let x = Int(index.x)
+        let y = Int(index.y)
         
         var tiles = [SKASprite]()
         
@@ -588,14 +662,24 @@ class SKATiledMap : SKNode{
         return tiles
     }
     
-//    func tileAround(index : CGPoint) -> [SKASprite?]{
-//        return [SKASprite]()
-//    }
-    
+    /**
+     Convientent method to quickly get a specific tile for a specific layer on the map
+     @param layerNumber the layer in which you would like to use
+     @param x the x index to use
+     @param y the y index to use
+     */
     func spriteFor(layerNumber : Int, x : Int, y : Int) -> SKASprite{
         let layer = spriteLayers[layerNumber]
         let sprite = layer.sprites[x][y]
         return sprite
     }
+    
+    /**
+    Lame required function for subclassing
+    */
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     
 }

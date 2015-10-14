@@ -19,7 +19,6 @@
 		B6DEDE4C1BC3467B000BABCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DEDE4A1BC3467B000BABCD /* Main.storyboard */; };
 		B6DEDE4E1BC3467B000BABCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6DEDE4D1BC3467B000BABCD /* Assets.xcassets */; };
 		B6DEDE511BC3467B000BABCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6DEDE4F1BC3467B000BABCD /* LaunchScreen.storyboard */; };
-		B6DEDE6F1BC3F316000BABCD /* SKACollisionDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE681BC3F316000BABCD /* SKACollisionDefine.swift */; };
 		B6DEDE701BC3F316000BABCD /* SKAObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE691BC3F316000BABCD /* SKAObject.swift */; };
 		B6DEDE711BC3F316000BABCD /* SKAObjectLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6A1BC3F316000BABCD /* SKAObjectLayer.swift */; };
 		B6DEDE721BC3F316000BABCD /* SKASprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */; };
@@ -44,7 +43,6 @@
 		B6DEDE4D1BC3467B000BABCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6DEDE501BC3467B000BABCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6DEDE521BC3467B000BABCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6DEDE681BC3F316000BABCD /* SKACollisionDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKACollisionDefine.swift; sourceTree = "<group>"; };
 		B6DEDE691BC3F316000BABCD /* SKAObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAObject.swift; sourceTree = "<group>"; };
 		B6DEDE6A1BC3F316000BABCD /* SKAObjectLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAObjectLayer.swift; sourceTree = "<group>"; };
 		B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKASprite.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 				B6DEDE6A1BC3F316000BABCD /* SKAObjectLayer.swift */,
 				B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */,
 				B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */,
-				B6DEDE681BC3F316000BABCD /* SKACollisionDefine.swift */,
 				B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */,
 			);
 			path = SKATiledMap;
@@ -203,7 +200,6 @@
 			files = (
 				B6DEDE741BC3F316000BABCD /* SKATiledMap.swift in Sources */,
 				B6DEDE471BC3467B000BABCD /* GameScene.swift in Sources */,
-				B6DEDE6F1BC3F316000BABCD /* SKACollisionDefine.swift in Sources */,
 				B6DEDE731BC3F316000BABCD /* SKASpriteLayer.swift in Sources */,
 				B6DEDE711BC3F316000BABCD /* SKAObjectLayer.swift in Sources */,
 				B6DEDEC21BC94E1F000BABCD /* SKAMapTile.swift in Sources */,
