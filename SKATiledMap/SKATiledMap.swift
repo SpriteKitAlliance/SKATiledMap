@@ -20,6 +20,7 @@ enum SKAColliderType: UInt32 {
 
 class SKATiledMap : SKNode{
 
+    //MARK: - Public Properties
     /**
      Number of columns for the map
      */
@@ -60,16 +61,18 @@ class SKATiledMap : SKNode{
      */
     var autoFollowNode : SKNode?
     
+    //MARK: - Private Properties
     /**
      Culling logic
      */
-    var culledBefore = false
-    var visibleArray = [SKASprite]()
-    var lastY = 0
-    var lastX = 0
-    var lastWidth = 0
-    var lastHeight = 0
+    private var culledBefore = false
+    private var visibleArray = [SKASprite]()
+    private var lastY = 0
+    private var lastX = 0
+    private var lastWidth = 0
+    private var lastHeight = 0
     
+    //MARK: - Initializers
     /**
      Designated Initializer
      @param mapName name of the map you want. No need for file extension
@@ -86,6 +89,7 @@ class SKATiledMap : SKNode{
         loadFile(mapName)
     }
     
+    //MARK: - Public Functions
     /**
      Looks for tmx or json file based on a map name and loads map data
      @param fileName the name of the map without a file extension
@@ -109,369 +113,8 @@ class SKATiledMap : SKNode{
     }
     
     /**
-     Creates the key value pair needed for map creation based on json file
-     @param filePath the path to the JSON file
-     */
-    func mapDictionaryForJSONFile(filePath : String){
-        
-        //attemps to return convert json file over to a key value pairs
-        do{
-            let JSONData = try NSData(contentsOfFile: filePath, options: .DataReadingMappedIfSafe)
-            
-            if (JSONData.length > 0)
-            {
-                do{
-                    let mapDictionary = try NSJSONSerialization.JSONObjectWithData(JSONData, options:.AllowFragments) as! [String:AnyObject]
-                    loadMap(mapDictionary)
-                }
-                catch
-                {
-                    print("Unable to convert \(filePath) to a key value object")
-                }
-            }
-        }
-        catch
-        {
-            print("Unable to load \(filePath) as NSData")
-        }
-    }
-    
-    // MARK: - private class functions
-    /**
-     Generates a map based on pre determined keys and values
-     @param mapDictionary the key value set that originated from a tmx or json file
-     */
-    private func loadMap(mapDictionary : [String : AnyObject]){
-
-        //getting additional user generated properties for map
-        guard let _ = mapDictionary["properties"] as? [String : AnyObject] else {
-            print("Error: Map is missing properties values")
-            return
-        }
-        mapProperties = mapDictionary["properties"] as! [String : AnyObject]
-        
-        //getting value that determines how many tiles wide the map is
-        guard let _ = mapDictionary["width"] as? Int else {
-            print("Error: Map is missing width value")
-            return
-        }
-        mapWidth = mapDictionary["width"] as! Int
-        
-        //getting value that determines how many tiles tall a map is
-        guard let _ = mapDictionary["height"] as? Int else {
-            print("Error: Map is missing height value")
-            return
-        }
-        mapHeight = mapDictionary["height"] as! Int
-        
-        //getting value that determines the width of a tile
-        guard let _ = mapDictionary["tilewidth"] as? Int else {
-            print("Error: Map is missing width value")
-            return
-        }
-        tileWidth = mapDictionary["tilewidth"] as! Int
-        
-        //getting value that determines the height of a tile
-        guard let _ = mapDictionary["tileheight"] as? Int else {
-            print("Error: Map is missing width value")
-            return
-        }
-        tileHeight = mapDictionary["tileheight"] as! Int
-        
-        var mapTiles = [String : SKAMapTile]()
-        
-        guard let tileSets = mapDictionary["tilesets"] as? [AnyObject] else{
-            print("Map is missing tile sets to generate map")
-            return
-        }
-        
-        for (_, element) in tileSets.enumerate() {
-            
-
-            let tileSet = element as! [String : AnyObject]
-            let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
-
-            let tileWidth = tileSet["tilewidth"] as! Int
-            let tileHeight = tileSet["tileheight"] as! Int
-            
-            //would like to figure out a better way to get that
-            if let path = tileSet["image"] as? NSString{
-                
-                let component = path.lastPathComponent as NSString
-                let imageName = component.stringByDeletingPathExtension
-                let imageExtension = component.pathExtension
-                
-                var textureImage : UIImage?
-                
-                if let image = UIImage(named: imageName){
-                    textureImage = image
-                }
-                else
-                {
-                    if let filePath = NSBundle.mainBundle().pathForResource(imageName, ofType: imageExtension){
-                        
-                        textureImage = UIImage(contentsOfFile: filePath)
-
-                    }
-                }
-                
-                
-                if (textureImage != nil) {
-                
-                    let mainTexture = SKTexture(image: textureImage!)
-                    mainTexture.filteringMode = .Nearest
-                    
-                    //working on small texture
-                    let imageWidth = tileSet["imagewidth"] as! Int
-                    let imageHeight = tileSet["imageheight"] as! Int
-                    
-                    let spacing = tileSet["spacing"] as! Int
-                    let margin = tileSet["margin"] as! Int
-                    
-                    let width = imageWidth - (margin * 2)
-                    let height = imageHeight - (margin * 2)
-                    
-                    let tileColumns : Int = Int(ceil(Float(width) / Float(tileWidth + spacing)))
-                    let tileRows : Int = Int(ceil(Float(height) / Float(tileHeight + spacing)))
-                    
-                    let spacingPercentWidth : Float = Float(spacing)/Float(imageWidth)
-                    let spacingPercentHeight : Float = Float(spacing)/Float(imageHeight)
-                    
-                    let marginPercentWidth : Float = Float(margin) / Float(tileWidth)
-                    let marginPercentHeight : Float = Float(margin) / Float(tileHeight)
-                    
-                    let tileWidthPercent : Float = Float (tileWidth) / Float(imageWidth)
-                    let tileHeightPercent : Float = Float (tileHeight) / Float(imageHeight)
-                    
-                    let firstIndex = tileSet["firstgid"] as! Int
-                    var index = firstIndex
-                    
-                    let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
-                    
-                    for var rowID = 0; rowID < tileRows; ++rowID{
-                        
-                        for var columnID = 0; columnID < tileColumns; ++columnID{
-                            
-                            let x = CGFloat(marginPercentWidth + Float(columnID) * Float(tileWidthPercent + spacingPercentWidth)); // advance based on column
-                            
-                            let yOffset = Float(marginPercentHeight + tileHeightPercent)
-                            let yTileHeight = Float(tileHeightPercent + spacingPercentHeight)
-                            
-                            let y = CGFloat(1.0 - (yOffset + (Float(rowID) * yTileHeight))) //advance based on row
-                            
-                            
-                            let texture = SKTexture(rect: CGRectMake(x, y, CGFloat(tileWidthPercent), CGFloat(tileHeightPercent)), inTexture: mainTexture)
-                            
-                            texture.filteringMode = .Nearest
-                            
-                            let mapTile = SKAMapTile(texture: texture)
-                            
-                            let propertiesKey = String(index-firstIndex)
-                            
-                            if (tilesetProperties != nil) {
-                                
-                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
-                                    mapTile.properties = tileProperties
-                                }
-                                
-                            }
-                            
-                            mapTiles[String(index)] = mapTile
-                            index++;
-                        }
-                    }
-
-                }
-                else
-                {
-                    print("It appears Image:\(component) is missing")
-                    return;
-                }
-            }
-            
-            if let collectionTiles = tileSet["tiles"] as? [String : AnyObject]
-            {
-                
-                let firstIndex = tileSet["firstgid"] as! Int
-
-                for (key, spriteDict) in collectionTiles{
-                    
-                    if let dict = spriteDict as? [String : AnyObject]{
-                        
-                        var imageName : NSString?
-                        
-                        if let imagePath = dict["image"] as? NSString{
-                            
-                            imageName = imagePath.lastPathComponent
-                        }
-                        
-                        if let imagePath = dict["source"] as? NSString{
-                            
-                            imageName = imagePath.lastPathComponent
-                        }
-                        
-                        if (imageName != nil) {
-                            let texture = SKTexture(imageNamed: (imageName?.stringByDeletingPathExtension)!)
-                            texture.filteringMode = .Nearest
-                            
-                            let index = Int(key)! + firstIndex
-                            
-                            let propertiesKey = String(firstIndex-index)
-                            
-                            let mapTile = SKAMapTile(texture: texture)
-                            
-                            if (tilesetProperties != nil) {
-                                
-                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
-                                    mapTile.properties = tileProperties
-                                }
-                                
-                            }
-                            
-                            mapTiles[String(index)] = mapTile
-                        }
-                    }
-                }
-            }
-        }
-        
-        var layerNumber = 0
-        
-        if let layers = mapDictionary["layers"] as? [AnyObject]{
-            
-            for layer  in layers {
-                
-                if let layerDictionary = layer as? [String : AnyObject] {
-                    if let tileIDs = layerDictionary["data"] as? [Int]{
-                    
-                        let spriteLayer = SKASpriteLayer(properties: layerDictionary)
-                        
-                        var rowArray = [[Int]]()
-                        
-                        var rangeStart = 0
-                        let rangeLength = mapWidth-1
-                        
-                        for var index = 0; index < mapHeight; ++index{
-                            rangeStart = tileIDs.count - ((index + 1) * mapWidth )
-                            
-                            let row : [Int] = Array(tileIDs[rangeStart...rangeStart+rangeLength])
-                            rowArray.append(row)
-                        }
-                        
-                        var sprites = [[SKASprite]]()
-                        
-                        for var i = 0; i < self.mapWidth; ++i{
-                            
-                            var column = [SKASprite]()
-                            for var j = 0; j < self.mapHeight; ++j{
-                                column.append(SKASprite())
-                            }
-                            
-                            sprites.append(column)
-                        }
-                        
-                        //adding sprites
-                        for (rowIndex, row) in rowArray.enumerate(){
-                            
-                            for (columnIndex, number) in row.enumerate(){
-                                let key = String(number)
-                                if let mapTile = mapTiles[key]{
-                                    
-                                    let sprite = SKASprite(texture: mapTile.texture)
-                                    
-                                    //positioning
-                                    let xOffset = Int(tileWidth / 2)
-                                    let yOffset = Int(tileHeight / 2)
-                                    let x = (Int(sprite.size.width / 2) - xOffset) + xOffset + columnIndex * tileWidth
-                                    let y = (Int(sprite.size.height / 2) - yOffset) + yOffset + rowIndex * tileHeight
-                                    sprite.position = CGPointMake(CGFloat(x), CGFloat(y))
-                                    
-                                    sprite.properties = mapTile.properties
-                                    
-                                    if  let properties = sprite.properties{
-                                        if let collisionType = properties["SKACollsionType"]! as? String{
-                                            if collisionType == "SKACollisionTypeRect"{
-                                                sprite.physicsBody = SKPhysicsBody(rectangleOfSize: sprite.size)
-                                                sprite.physicsBody!.dynamic = false
-                                                sprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
-                                                sprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
-                                                sprite.zPosition = 20;
-                                            }
-                                        }
-                                    }
-                                    
-                                    spriteLayer.addChild(sprite)
-                                    
-                                    if(!spriteLayer.visible){
-                                        sprite.hidden = true
-                                    }
-                                    
-                                    sprites[columnIndex][rowIndex] = sprite
-                                }
-                            }
-                        }
-                        
-                        spriteLayer.sprites = sprites
-                        spriteLayer.zPosition = CGFloat(layerNumber)
-                        addChild(spriteLayer)
-                        spriteLayers.append(spriteLayer)
-                        
-                        layerNumber++
-                    }
-                    if let objectsArray = layerDictionary["objects"] as? [AnyObject]{
-                        
-                        let objectLayer = SKAObjectLayer(properties: layerDictionary)
-                        var collisionSprites = [SKASprite]()
-                        var objects = [SKAObject]()
-                        
-                        for objectDictionary in objectsArray{
-                            
-                            if let properties = objectDictionary as? [String : AnyObject]{
-                                
-                                let object = SKAObject(properties: properties)
-                                
-                                if(objectLayer.drawOrder == "topdown")
-                                {
-                                    object.y = (mapHeight * tileHeight) - object.y - object.height;
-                                }
-                                
-                                if let objectProperties = object.properties{
-                                    if let collisionType = objectProperties["SKACollisionType"] as? String{
-                                        if collisionType == "SKACollisionTypeRect"{
-                                            
-                                            let floorSprite = SKASprite(color: SKColor.clearColor(), size: CGSizeMake(CGFloat(object.width), CGFloat(object.height)))
-                                            floorSprite.zPosition = CGFloat(layerNumber)
-                                            let centerX = CGFloat(object.x+object.width/2)
-                                            let centerY = CGFloat(object.y+object.height/2)
-                                            floorSprite.position = CGPointMake(centerX, centerY)
-                                            floorSprite.physicsBody = SKPhysicsBody(rectangleOfSize: floorSprite.size)
-                                            floorSprite.physicsBody?.dynamic = false
-                                            floorSprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
-                                            floorSprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
-                                            addChild(floorSprite)
-                                            collisionSprites.append(floorSprite)
-                                        }
-                                    }
-                                }
-                                
-                                objects.append(object)
-                            }
-                        }
-                        
-                        objectLayer.collisionSprites = collisionSprites;
-                        
-                        objectLayer.objects = objects;
-                        objectLayers.append(objectLayer)
-                        layerNumber++;
-                    }
-                }
-            }
-        }
-    }
-    
-    /**
-     Used to update map position if autoFollowNode is set
-     */
+    Used to update map position if autoFollowNode is set
+    */
     func update(){
         
         if (autoFollowNode != nil && scene?.view != nil)
@@ -480,9 +123,7 @@ class SKATiledMap : SKNode{
                 -autoFollowNode!.position.x + scene!.size.width / 2,
                 -autoFollowNode!.position.y + scene!.size.height / 2);
             
-            /*
-            * Check position of the minimap and stop it from going off screen
-            */
+            //check position of the minimap and stop it from going off screen
             var tempPosition = position;
             
             if(tempPosition.x > 0)
@@ -508,13 +149,13 @@ class SKATiledMap : SKNode{
     }
     
     /**
-     Culling "hiding" nodes that do not need to be rendered greatly improves performace and frame rate.
-     This method is optimized to be called every update loop
-     @param x the center x index you wish to cull around
-     @param y the center y index you wish to cull around
-     @param width the number of tiles wide you would like to keep
-     @param height the number of tiles high you would like to keep
-     */
+    Culling "hiding" nodes that do not need to be rendered greatly improves performace and frame rate.
+    This method is optimized to be called every update loop
+    @param x the center x index you wish to cull around
+    @param y the center y index you wish to cull around
+    @param width the number of tiles wide you would like to keep
+    @param height the number of tiles high you would like to keep
+    */
     func cullAround(x : Int, y : Int, width : Int, height : Int){
         
         if(!culledBefore)
@@ -543,6 +184,7 @@ class SKATiledMap : SKNode{
             var endingX = startingX + width
             var endingY = startingY + height
             
+            //preventing trying to unhide sprites off map
             if(startingX < 0){
                 startingX = 0
                 endingX = width
@@ -579,6 +221,7 @@ class SKATiledMap : SKNode{
                 endingY = 0
             }
             
+            //un hiding sprites that need to be rendered
             for var layerIndex = 0; layerIndex < spriteLayers.count; ++layerIndex{
                 for var xIndex = startingX; xIndex < endingX; ++xIndex{
                     for var yIndex = startingY; yIndex < endingY; ++yIndex{
@@ -589,6 +232,7 @@ class SKATiledMap : SKNode{
                 }
             }
             
+            //storing values to optimize culling during update
             lastX = x
             lastY = y
             lastWidth = width
@@ -598,11 +242,11 @@ class SKATiledMap : SKNode{
             
         }
     }
-
+    
     /**
-     Returns a CGPoint that can be used as an x and y index
-     @param point the point in which to calculate the index
-     */
+    Returns a CGPoint that can be used as an x and y index
+    @param point the point in which to calculate the index
+    */
     func index(point : CGPoint) -> CGPoint{
         let x = Int(point.x)/tileWidth
         let y = Int(point.y)/tileHeight
@@ -610,11 +254,11 @@ class SKATiledMap : SKNode{
     }
     
     /**
-     Returns all the tiles around a specific index for a specific point. Very useful if you need to know
-     about tiles around a specific index.
-     @param index the CGPoint that will be used as a x and y index
-     @param layerNumber the layer in which you would like your tiles
-     */
+    Returns all the tiles around a specific index for a specific point. Very useful if you need to know
+    about tiles around a specific index.
+    @param index the CGPoint that will be used as a x and y index
+    @param layerNumber the layer in which you would like your tiles
+    */
     func tilesAround(index : CGPoint, layerNumber : Int)-> [SKASprite?]{
         
         let x = Int(index.x)
@@ -624,6 +268,7 @@ class SKATiledMap : SKNode{
         
         let layer = spriteLayers[layerNumber]
         
+        //grabbring sprites but checking to make sure it isn't trying to grab outside map bounds
         if (x - 1 > 0){
             
             tiles.append(layer.sprites[x-1][y])
@@ -663,16 +308,405 @@ class SKATiledMap : SKNode{
     }
     
     /**
-     Convientent method to quickly get a specific tile for a specific layer on the map
-     @param layerNumber the layer in which you would like to use
-     @param x the x index to use
-     @param y the y index to use
-     */
+    Convientent method to quickly get a specific tile for a specific layer on the map
+    @param layerNumber the layer in which you would like to use
+    @param x the x index to use
+    @param y the y index to use
+    */
     func spriteFor(layerNumber : Int, x : Int, y : Int) -> SKASprite{
         let layer = spriteLayers[layerNumber]
         let sprite = layer.sprites[x][y]
         return sprite
     }
+
+    
+    // MARK: - Private Class Functions
+    /**
+     Creates the key value pair needed for map creation based on json file
+     @param filePath the path to the JSON file
+     */
+    func mapDictionaryForJSONFile(filePath : String){
+        
+        //attemps to return convert json file over to a key value pairs
+        do{
+            let JSONData = try NSData(contentsOfFile: filePath, options: .DataReadingMappedIfSafe)
+            
+            if (JSONData.length > 0)
+            {
+                do{
+                    let mapDictionary = try NSJSONSerialization.JSONObjectWithData(JSONData, options:.AllowFragments) as! [String:AnyObject]
+                    loadMap(mapDictionary)
+                }
+                catch
+                {
+                    print("Unable to convert \(filePath) to a key value object")
+                }
+            }
+        }
+        catch
+        {
+            print("Unable to load \(filePath) as NSData")
+        }
+    }
+    
+    /**
+     Generates a map based on pre determined keys and values
+     @param mapDictionary the key value set that originated from a tmx or json file
+     */
+    private func loadMap(mapDictionary : [String : AnyObject]){
+
+        //getting additional user generated properties for map
+        guard let _ = mapDictionary["properties"] as? [String : AnyObject] else {
+            fatalError("Error: Map is missing properties values")
+        }
+        mapProperties = mapDictionary["properties"] as! [String : AnyObject]
+        
+        //getting value that determines how many tiles wide the map is
+        guard let _ = mapDictionary["width"] as? Int else {
+            fatalError("Error: Map is missing width value")
+        }
+        mapWidth = mapDictionary["width"] as! Int
+        
+        //getting value that determines how many tiles tall a map is
+        guard let _ = mapDictionary["height"] as? Int else {
+            fatalError("Error: Map is missing height value")
+        }
+        mapHeight = mapDictionary["height"] as! Int
+        
+        //getting value that determines the width of a tile
+        guard let _ = mapDictionary["tilewidth"] as? Int else {
+            fatalError("Error: Map is missing width value")
+        }
+        tileWidth = mapDictionary["tilewidth"] as! Int
+        
+        //getting value that determines the height of a tile
+        guard let _ = mapDictionary["tileheight"] as? Int else {
+            fatalError("Error: Map is missing width value")
+        }
+        tileHeight = mapDictionary["tileheight"] as! Int
+        
+        var mapTiles = [String : SKAMapTile]()
+        
+        guard let tileSets = mapDictionary["tilesets"] as? [AnyObject] else{
+            fatalError("Map is missing tile sets to generate map")
+        }
+        
+        //setting up all tile set layers
+        for (_, element) in tileSets.enumerate() {
+            
+            guard let tileSet = element as? [String : AnyObject] else{
+                fatalError("Error: tile sets are not properly formatted")
+            }
+            
+            let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
+
+            guard let tileWidth = tileSet["tilewidth"] as? Int else{
+                fatalError("Error: tile width for tile set isn't set propertly")
+            }
+            
+            guard let tileHeight = tileSet["tileheight"] as? Int else{
+                fatalError("Error: tile width for tile set isn't set propertly")
+            }
+            
+            //determining if we have a sprite sheet
+            if let path = tileSet["image"] as? NSString{
+                
+                //parsing out the image name
+                let component = path.lastPathComponent as NSString
+                let imageName = component.stringByDeletingPathExtension
+                let imageExtension = component.pathExtension
+                
+                var textureImage : UIImage?
+                
+                //first trying to get the image without absolute path
+                if let image = UIImage(named: imageName){
+                    textureImage = image
+                }
+                else
+                {
+                    //resorting to absolute path if reference folders are used
+                    if let filePath = NSBundle.mainBundle().pathForResource(imageName, ofType: imageExtension){
+                        
+                        textureImage = UIImage(contentsOfFile: filePath)
+                    }else{
+                        print("Error: missing image: \(imageName)")
+                    }
+                }
+                
+                //creating smaller textures from big texture
+                if (textureImage != nil) {
+                
+                    let mainTexture = SKTexture(image: textureImage!)
+                    mainTexture.filteringMode = .Nearest
+                    
+                    //geting sprite sheet information
+                    guard let imageWidth = tileSet["imagewidth"] as? Int else {
+                        fatalError("Error: Image width is not set properly on tile sheet")
+                    }
+                    
+                    guard let imageHeight = tileSet["imageheight"] as? Int else{
+                        fatalError("Error: Image height is not set properly on tile sheet")
+                    }
+                    
+                    guard let spacing = tileSet["spacing"] as? Int else{
+                        fatalError("Error: Image spacing is not set properly on tile sheet")
+                    }
+                    
+                    guard let margin = tileSet["margin"] as? Int else{
+                        fatalError("Error: Image margin is not set properly on tile sheet")
+                    }
+                    
+                    guard let firstIndex = tileSet["firstgid"] as? Int else{
+                        fatalError("Error: Image firstgid is not set properly on tile sheet")
+                    }
+
+                    let width = imageWidth - (margin * 2)
+                    let height = imageHeight - (margin * 2)
+                    
+                    let tileColumns : Int = Int(ceil(Float(width) / Float(tileWidth + spacing)))
+                    let tileRows : Int = Int(ceil(Float(height) / Float(tileHeight + spacing)))
+                    
+                    let spacingPercentWidth : Float = Float(spacing)/Float(imageWidth)
+                    let spacingPercentHeight : Float = Float(spacing)/Float(imageHeight)
+                    
+                    let marginPercentWidth : Float = Float(margin) / Float(tileWidth)
+                    let marginPercentHeight : Float = Float(margin) / Float(tileHeight)
+                    
+                    let tileWidthPercent : Float = Float (tileWidth) / Float(imageWidth)
+                    let tileHeightPercent : Float = Float (tileHeight) / Float(imageHeight)
+                    
+                    var index = firstIndex
+                    
+                    let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
+                    
+                    for var rowID = 0; rowID < tileRows; ++rowID{
+                        
+                        for var columnID = 0; columnID < tileColumns; ++columnID{
+                            
+                            // advance based on column
+                            let x = CGFloat(marginPercentWidth + Float(columnID) * Float(tileWidthPercent + spacingPercentWidth));
+                            
+                            //advance based on row
+                            let yOffset = Float(marginPercentHeight + tileHeightPercent)
+                            let yTileHeight = Float(tileHeightPercent + spacingPercentHeight)
+                            let y = CGFloat(1.0 - (yOffset + (Float(rowID) * yTileHeight)))
+                            
+                            let texture = SKTexture(rect: CGRectMake(x, y, CGFloat(tileWidthPercent), CGFloat(tileHeightPercent)), inTexture: mainTexture)
+                            
+                            texture.filteringMode = .Nearest
+                            
+                            //creating mapTile object to store texture and sprite properties
+                            let mapTile = SKAMapTile(texture: texture)
+                            
+                            let propertiesKey = String(index-firstIndex)
+                            
+                            if (tilesetProperties != nil) {
+                                
+                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
+                                    mapTile.properties = tileProperties
+                                }
+                                
+                            }
+                            
+                            mapTiles[String(index)] = mapTile
+                            index++;
+                        }
+                    }
+
+                }
+                else
+                {
+                    print("It appears Image:\(component) is missing")
+                    return;
+                }
+            }
+            
+            //determining if we are working with image collection
+            if let collectionTiles = tileSet["tiles"] as? [String : AnyObject]
+            {
+                
+                guard let firstIndex = tileSet["firstgid"] as? Int else{
+                    fatalError("Error: Image firstgid is not set properly on tile sheet")
+                }
+
+                for (key, spriteDict) in collectionTiles{
+                    
+                    if let dict = spriteDict as? [String : AnyObject]{
+                        
+                        //getting image name to be used in texture
+                        var imageName : NSString?
+                        
+                        if let imagePath = dict["image"] as? NSString{
+                            
+                            imageName = imagePath.lastPathComponent
+                        }
+                        
+                        if let imagePath = dict["source"] as? NSString{
+                            
+                            imageName = imagePath.lastPathComponent
+                        }
+                        
+                        if (imageName != nil) {
+                            
+                            //creating mapTile object to store texture and sprite properties
+                            let texture = SKTexture(imageNamed: (imageName!.stringByDeletingPathExtension))
+                            texture.filteringMode = .Nearest
+                            
+                            let index = Int(key)! + firstIndex
+                            
+                            let propertiesKey = String(firstIndex-index)
+                            
+                            let mapTile = SKAMapTile(texture: texture)
+                            
+                            if (tilesetProperties != nil) {
+                                
+                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
+                                    mapTile.properties = tileProperties
+                                }
+                                
+                            }
+                            
+                            mapTiles[String(index)] = mapTile
+                        }
+                    }
+                }
+            }
+        }
+        
+        var layerNumber = 0
+        
+        //generating layers
+        if let layers = mapDictionary["layers"] as? [AnyObject]{
+            
+            for layer  in layers {
+                if let layerDictionary = layer as? [String : AnyObject] {
+                    
+                    //determining if we are working with a sprite layer
+                    if let tileIDs = layerDictionary["data"] as? [Int]{
+                    
+                        //creating a sprite layer to hold all sprites for that layer
+                        let spriteLayer = SKASpriteLayer(properties: layerDictionary)
+                        
+                        //sorting tile ids in the correct order
+                        var rowArray = [[Int]]()
+                        
+                        var rangeStart = 0
+                        let rangeLength = mapWidth-1
+                        
+                        for var index = 0; index < mapHeight; ++index{
+                            rangeStart = tileIDs.count - ((index + 1) * mapWidth )
+                            
+                            let row : [Int] = Array(tileIDs[rangeStart...rangeStart+rangeLength])
+                            rowArray.append(row)
+                        }
+                        
+                        //creating a 2d array to make it easy to locate sprites by index
+                        var sprites = Array(count: mapWidth, repeatedValue:Array(count: mapHeight, repeatedValue: SKASprite()))
+                        
+                        //adding sprites
+                        for (rowIndex, row) in rowArray.enumerate(){
+                            for (columnIndex, number) in row.enumerate(){
+                                let key = String(number)
+                                if let mapTile = mapTiles[key]{
+                                    
+                                    let sprite = SKASprite(texture: mapTile.texture)
+                                    
+                                    //positioning
+                                    let xOffset = Int(tileWidth / 2)
+                                    let yOffset = Int(tileHeight / 2)
+                                    let x = (Int(sprite.size.width / 2) - xOffset) + xOffset + columnIndex * tileWidth
+                                    let y = (Int(sprite.size.height / 2) - yOffset) + yOffset + rowIndex * tileHeight
+                                    sprite.position = CGPointMake(CGFloat(x), CGFloat(y))
+                                    
+                                    sprite.properties = mapTile.properties
+                                    
+                                    //creating collision body if special SKACollision type is set
+                                    if  let properties = sprite.properties{
+                                        if let collisionType = properties["SKACollisionType"]! as? String{
+                                            if collisionType == "SKACollisionTypeRect"{
+                                                sprite.physicsBody = SKPhysicsBody(rectangleOfSize: sprite.size)
+                                                sprite.physicsBody!.dynamic = false
+                                                sprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                                sprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
+                                                sprite.zPosition = 20;
+                                            }
+                                        }
+                                    }
+                                    
+                                    spriteLayer.addChild(sprite)
+                                    
+                                    if(!spriteLayer.visible){
+                                        sprite.hidden = true
+                                    }
+                                    
+                                    sprites[columnIndex][rowIndex] = sprite
+                                }
+                            }
+                        }
+                        
+                        spriteLayer.sprites = sprites
+                        spriteLayer.zPosition = CGFloat(layerNumber)
+                        addChild(spriteLayer)
+                        spriteLayers.append(spriteLayer)
+                        
+                        layerNumber++
+                    }
+                    
+                    //determining if we are working with an object layer
+                    if let objectsArray = layerDictionary["objects"] as? [AnyObject]{
+                        
+                        //creating an object layer to hold object layer info
+                        let objectLayer = SKAObjectLayer(properties: layerDictionary)
+                        var collisionSprites = [SKASprite]()
+                        var objects = [SKAObject]()
+                        
+                        for objectDictionary in objectsArray{
+                            
+                            if let properties = objectDictionary as? [String : AnyObject]{
+                                
+                                let object = SKAObject(properties: properties)
+                                
+                                //getting origin in the correct position based on draw order
+                                if(objectLayer.drawOrder == "topdown")
+                                {
+                                    object.y = (mapHeight * tileHeight) - object.y - object.height;
+                                }
+                                
+                                //creating collision body if special SKACollision type is set
+                                if let objectProperties = object.properties{
+                                    if let collisionType = objectProperties["SKACollisionType"] as? String{
+                                        if collisionType == "SKACollisionTypeRect"{
+                                            
+                                            let floorSprite = SKASprite(color: SKColor.clearColor(), size: CGSizeMake(CGFloat(object.width), CGFloat(object.height)))
+                                            floorSprite.zPosition = CGFloat(layerNumber)
+                                            let centerX = CGFloat(object.x+object.width/2)
+                                            let centerY = CGFloat(object.y+object.height/2)
+                                            floorSprite.position = CGPointMake(centerX, centerY)
+                                            floorSprite.physicsBody = SKPhysicsBody(rectangleOfSize: floorSprite.size)
+                                            floorSprite.physicsBody?.dynamic = false
+                                            floorSprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                            floorSprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
+                                            addChild(floorSprite)
+                                            collisionSprites.append(floorSprite)
+                                        }
+                                    }
+                                }
+                                
+                                objects.append(object)
+                            }
+                        }
+                        
+                        objectLayer.collisionSprites = collisionSprites;
+                        
+                        objectLayer.objects = objects;
+                        objectLayers.append(objectLayer)
+                        layerNumber++;
+                    }
+                }
+            }
+        }
+    }
+    
     
     /**
     Lame required function for subclassing
