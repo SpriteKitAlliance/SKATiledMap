@@ -32,35 +32,35 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         
-        addChild(map)
-    
-        //showing ease of adding actions to a layer
-        let fadeOut = SKAction.fadeAlphaTo(0, duration: 2)
-        let fadeIn = SKAction.fadeAlphaTo(1, duration: 2)
-        
-        let sequence = SKAction.sequence([fadeOut, fadeIn])
-        let repeatAction = SKAction.repeatActionForever(sequence)
-        
-        let backgroundLayer = map.spriteLayers[0]
-        backgroundLayer .runAction(repeatAction)
-        
-        //showing ease of adding action to a specific sprite
-        let rotate = SKAction.rotateByAngle(2, duration: 1)
-        let repeatRotation = SKAction.repeatActionForever(rotate)
-        
-        let sprite = map.spriteFor(2, x: 5, y: 4)
-        sprite.runAction(repeatRotation)
-        
-        //adding test player
-        player.zPosition = 20
-        player.position = CGPointMake(400, 400);
-        
-        map.autoFollowNode = player;
-        map.addChild(player)
-        
-        //adding test hud
-        let hud = SKATestHud(scene: self, player: player)
-        addChild(hud)
+//        addChild(map)
+//    
+//        //showing ease of adding actions to a layer
+//        let fadeOut = SKAction.fadeAlphaTo(0, duration: 2)
+//        let fadeIn = SKAction.fadeAlphaTo(1, duration: 2)
+//        
+//        let sequence = SKAction.sequence([fadeOut, fadeIn])
+//        let repeatAction = SKAction.repeatActionForever(sequence)
+//        
+//        let backgroundLayer = map.spriteLayers[0]
+//        backgroundLayer .runAction(repeatAction)
+//        
+//        //showing ease of adding action to a specific sprite
+//        let rotate = SKAction.rotateByAngle(2, duration: 1)
+//        let repeatRotation = SKAction.repeatActionForever(rotate)
+//        
+//        let sprite = map.spriteFor(2, x: 5, y: 4)
+//        sprite.runAction(repeatRotation)
+//        
+//        //adding test player
+//        player.zPosition = 20
+//        player.position = CGPointMake(400, 400);
+//        
+//        map.autoFollowNode = player;
+//        map.addChild(player)
+//        
+//        //adding test hud
+//        let hud = SKATestHud(scene: self, player: player)
+//        addChild(hud)
         
     }
     
@@ -72,13 +72,13 @@ class GameScene: SKScene {
    
     override func update(currentTime: CFTimeInterval) {
         
-        //updates
-        map.update()
-        player.update()
-        
-        //culling feature update
-        let playerIndex = map.index(player.position)
-        map.cullAround(Int(playerIndex.x), y: Int(playerIndex.y), width: 5, height: 5)
+//        //updates
+//        map.update()
+//        player.update()
+//        
+//        //culling feature update
+//        let playerIndex = map.index(player.position)
+//        map.cullAround(Int(playerIndex.x), y: Int(playerIndex.y), width: 5, height: 5)
 
     }
 }

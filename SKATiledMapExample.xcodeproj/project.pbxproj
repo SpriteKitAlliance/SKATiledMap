@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B62A4BCA1BD2959400272644 /* SKATMXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A4BC91BD2959400272644 /* SKATMXParser.swift */; settings = {ASSET_TAGS = (); }; };
+		B62A4BCC1BD2994900272644 /* SampleMapKenney.tmx in Resources */ = {isa = PBXBuildFile; fileRef = B62A4BCB1BD2994900272644 /* SampleMapKenney.tmx */; settings = {ASSET_TAGS = (); }; };
 		B637FE4D1BC95C95004DFE4D /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4C1BC95C95004DFE4D /* bg.png */; settings = {ASSET_TAGS = (); }; };
 		B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4E1BCA146A004DFE4D /* platforms.atlas */; settings = {ASSET_TAGS = (); }; };
 		B637FE531BCA146A004DFE4D /* misc.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4F1BCA146A004DFE4D /* misc.atlas */; settings = {ASSET_TAGS = (); }; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B62A4BC91BD2959400272644 /* SKATMXParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKATMXParser.swift; sourceTree = "<group>"; };
+		B62A4BCB1BD2994900272644 /* SampleMapKenney.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SampleMapKenney.tmx; sourceTree = "<group>"; };
 		B637FE4C1BC95C95004DFE4D /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		B637FE4E1BCA146A004DFE4D /* platforms.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = platforms.atlas; sourceTree = "<group>"; };
 		B637FE4F1BCA146A004DFE4D /* misc.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = misc.atlas; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 				B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */,
 				B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */,
 				B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */,
+				B62A4BC91BD2959400272644 /* SKATMXParser.swift */,
 			);
 			path = SKATiledMap;
 			sourceTree = SOURCE_ROOT;
@@ -121,6 +126,7 @@
 		B6DEDEBE1BC8C240000BABCD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B62A4BCB1BD2994900272644 /* SampleMapKenney.tmx */,
 				B637FE4C1BC95C95004DFE4D /* bg.png */,
 				B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */,
 				B637FE4E1BCA146A004DFE4D /* platforms.atlas */,
@@ -191,6 +197,7 @@
 				B637FE541BCA146A004DFE4D /* items.atlas in Resources */,
 				B637FE4D1BC95C95004DFE4D /* bg.png in Resources */,
 				B637FE531BCA146A004DFE4D /* misc.atlas in Resources */,
+				B62A4BCC1BD2994900272644 /* SampleMapKenney.tmx in Resources */,
 				B6DEDEC01BC8C240000BABCD /* SampleMapKenney.json in Resources */,
 				B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */,
 				B6DEDE511BC3467B000BABCD /* LaunchScreen.storyboard in Resources */,
@@ -216,6 +223,7 @@
 				B6DEDE721BC3F316000BABCD /* SKASprite.swift in Sources */,
 				B6DEDE701BC3F316000BABCD /* SKAObject.swift in Sources */,
 				B6DEDE491BC3467B000BABCD /* GameViewController.swift in Sources */,
+				B62A4BCA1BD2959400272644 /* SKATMXParser.swift in Sources */,
 				B6DEDE431BC3467B000BABCD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

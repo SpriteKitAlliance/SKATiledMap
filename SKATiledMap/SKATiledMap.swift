@@ -88,6 +88,8 @@ class SKATiledMap : SKNode{
     private var lastWidth = 0
     private var lastHeight = 0
     
+    var tmxParser : SKATMXParser?
+    
     //MARK: - Initializers
     /**
      Designated Initializer
@@ -114,6 +116,7 @@ class SKATiledMap : SKNode{
     {
         //checks for tmx first then trys json if a tmx file can not be found
         if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "tmx"){
+            tmxParser = SKATMXParser(filePath:filePath)
             //currently tmx files are not supported but will be in the near future
             print("Sorry TMX files are not supported yet \(filePath)")
             return
