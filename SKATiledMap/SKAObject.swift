@@ -17,6 +17,7 @@ class SKAObject{
     
     /**
      Y position defined by Tiled at creation
+     y position is flipped based on layer draworder
      */
     var y : Int
     
@@ -30,37 +31,77 @@ class SKAObject{
      */
     let height : Int
     
-    
-    let objectID : String
+    /**
+     Name defined by Tiled at creation
+     */
     let name : String
+    
+    /**
+     Type defined by Tiled at creation
+     */
     let type : String
     
+    /**
+     Rotation defined by Tiled at creation
+     */
     var rotation : Float
     
-    var visible = true
+    /**
+     Visible defined by Tiled at creation
+     */
+    var visible : Bool
     
     var properties : [String : AnyObject]?
 
-    
-    
     /**
      Designated Initializer
      @param properties the properties that come from the JSON or TMX file
      */
     init(properties: [String: AnyObject]){
-        objectID = "0"
-//        objectID = properties["objectID"] as! String
+        
+        guard let _ = properties["name"] as? String else{
+            fatalError("Error: required name property missing on tile object")
+        }
         name = properties["name"] as! String
+
+        guard let _ = properties["type"] as? String else{
+            fatalError("Error: required type property missing on tile object")
+        }
         type = properties["type"] as! String
         
+        
+        guard let _ = properties["x"] as? Int else{
+            fatalError("Error: required x position is missing on tile object")
+        }
         x = properties["x"] as! Int
+
+        guard let _ = properties["y"] as? Int else{
+            fatalError("Error: required y position is missing on tile object")
+        }
         y = properties["y"] as! Int
+
+        guard let _  = properties["width"] as? Int else {
+            fatalError("Error: required width is missing on tile object")
+        }
         width = properties["width"] as! Int
+
+        guard let _ = properties["height"] as? Int else{
+            fatalError("Error: required height is missing on tile object")
+        }
         height = properties["height"] as! Int
+
         
         self.properties = properties["properties"] as? [String : AnyObject]
 
-        self.rotation = 0.0
+        guard let _  = properties["rotation"] as? Float else{
+            fatalError("Error: required rotation is missing on tile object")
+        }
+        rotation = properties["rotation"] as! Float
+        
+        guard let _  = properties["visible"] as? Bool else{
+            fatalError("Error: required visible is missing on tile object")
+        }
+        visible = properties["visible"] as! Bool
 
     }
     

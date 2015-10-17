@@ -635,10 +635,6 @@ class SKATiledMap : SKNode{
                                     
                                     spriteLayer.addChild(sprite)
                                     
-                                    if(!spriteLayer.visible){
-                                        sprite.hidden = true
-                                    }
-                                    
                                     sprites[columnIndex][rowIndex] = sprite
                                 }
                             }

@@ -9,47 +9,28 @@
 import Foundation
 import SpriteKit
 
+/**
+ SKASpriteLayer is a SKNode generated from a Tiled sprite layer 
+ */
 class SKASpriteLayer : SKNode {
     
     /**
-    X position defined by Tiled at creation
-    */
-    let x : Int
-    
-    /**
-    Y position defined by Tiled at creation
-    */
-    let y : Int
-    
-    /**
-    Width defined by Tiled at creation
-    */
-    let width : Int
-    
-    /**
-    Height defined by Tiled at creation
-    */
-    let height : Int
-    
-    var opacity : Float = 0.0
-    var visible = true
-    
+     Type defined by Tiled at creation
+     */
     var type : String
-    var collisionSprites = [SKASprite]()
     
+    /**
+     A 2D array of SKASprites to easily access tiles for specific indexes
+     */
     var sprites = [[SKASprite]]()
 
     
     init(properties: [String: AnyObject]){
         
+        guard let _ = properties["type"] as? String else{
+            fatalError("Error: missing type for Sprite Layer")
+        }
         type = properties["type"] as! String
-        
-        x = properties["x"] as! Int
-        y = properties["y"] as! Int
-        width = properties["width"] as! Int
-        height = properties["width"] as! Int
-        
-//        self.rotation = 0.0
         
         super.init()
         

@@ -9,8 +9,14 @@
 import Foundation
 import SpriteKit
 
+/**
+ SKASprite generated from a Tiled Sprite with additional properties
+ */
 class SKASprite : SKSpriteNode {
     
+    /**
+     Properties defined by Tiled
+     */
     var properties : [String : AnyObject]?
     
 }

@@ -14,7 +14,7 @@ import SpriteKit
  */
 class SKAMapTile {
     
-    var texture : SKTexture
+    let texture : SKTexture
     var properties : [String : AnyObject]?
     
     init (texture : SKTexture)
