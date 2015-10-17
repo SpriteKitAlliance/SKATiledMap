@@ -1,15 +1,20 @@
 #SKATiledMap
-SKATiledMap is a simple solution for creating a map using the free Tiled Map Editor and supportes .tmx and .json formats http://www.mapeditor.org/. 
+SKATiledMap is a simple solution for creating a map using the free Tiled Map Editor and supportes .tmx and .json formats http://www.mapeditor.org/. SKATiledMap is written in Swift 1.2 and created in Xcode 7.
 
 The Sprite Kit Alliance is happy to provide the SKATiledMap free of charge without any warranty or guarantee (see license below for more info). If there is a feature missing or you would like added please email Skyler at skyler@skymistdevelopment.com.
+
+**special thanks to Kenney and his awesome art http://kenney.nl/assets
 
 ##SKAToolKit Install Instructions
 Copy all files in SKAToolKit folder into your project...yup that is it
 ![SKAMiniMap Example](Documentation/import.png)
 
+now load your map by calling...
+
+     let map = SKATiledMap(mapName: "SampleMapKenney") //name of your JSON file
 
 ##SKATiledMap
-This is a sprite node that represents a map created in Tiled. Currently SKATiledMap only supports JSON format (tmx support coming soon). 
+This is a sprite node that represents a map created in Tiled. Currently SKATiledMap only supports JSON format (tmx support coming soon). It also only supports orthogonal maps currently. If there is enough need we hope to add isometric support in the future.
 
 Add the JSON file and any images(see resolution support) used for your tiles into your project. To save your tiled map as JSON go to File->Export As in tiled and select .json
 
@@ -32,7 +37,7 @@ SKATileMap supports Tiled Maps that are exported in the JSON format. In Tiled ex
 To create a map it is a simple matter of calling this method.
 
 
-        let map = SKATiledMap(mapName: "SampleMapKenny") //name of your JSON file
+        let map = SKATiledMap(mapName: "SampleMapKenney") //name of your JSON file
     
 ###Useful Methods
 

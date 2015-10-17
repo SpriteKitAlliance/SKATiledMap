@@ -28,7 +28,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     let player = SKATestPlayer(color: UIColor.blueColor(), size: CGSizeMake(40, 80))
-    let map = SKATiledMap(mapName: "SampleMapKenny")
+    let map = SKATiledMap(mapName: "SampleMapKenney")
     
     override func didMoveToView(view: SKView) {
         
@@ -58,6 +58,7 @@ class GameScene: SKScene {
         map.autoFollowNode = player;
         map.addChild(player)
         
+        //adding test hud
         let hud = SKATestHud(scene: self, player: player)
         addChild(hud)
         
@@ -70,6 +71,8 @@ class GameScene: SKScene {
     }
    
     override func update(currentTime: CFTimeInterval) {
+        
+        //updates
         map.update()
         player.update()
         

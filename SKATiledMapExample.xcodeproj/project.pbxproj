@@ -24,7 +24,7 @@
 		B6DEDE721BC3F316000BABCD /* SKASprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */; };
 		B6DEDE731BC3F316000BABCD /* SKASpriteLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */; };
 		B6DEDE741BC3F316000BABCD /* SKATiledMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6D1BC3F316000BABCD /* SKATiledMap.swift */; };
-		B6DEDEC01BC8C240000BABCD /* SampleMapKenny.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DEDEBF1BC8C240000BABCD /* SampleMapKenny.json */; settings = {ASSET_TAGS = (); }; };
+		B6DEDEC01BC8C240000BABCD /* SampleMapKenney.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */; settings = {ASSET_TAGS = (); }; };
 		B6DEDEC21BC94E1F000BABCD /* SKAMapTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,7 @@
 		B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKASprite.swift; sourceTree = "<group>"; };
 		B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKASpriteLayer.swift; sourceTree = "<group>"; };
 		B6DEDE6D1BC3F316000BABCD /* SKATiledMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKATiledMap.swift; sourceTree = "<group>"; };
-		B6DEDEBF1BC8C240000BABCD /* SampleMapKenny.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleMapKenny.json; sourceTree = "<group>"; };
+		B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleMapKenney.json; sourceTree = "<group>"; };
 		B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAMapTile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				B637FE4C1BC95C95004DFE4D /* bg.png */,
-				B6DEDEBF1BC8C240000BABCD /* SampleMapKenny.json */,
+				B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */,
 				B637FE4E1BCA146A004DFE4D /* platforms.atlas */,
 				B637FE4F1BCA146A004DFE4D /* misc.atlas */,
 				B637FE501BCA146A004DFE4D /* items.atlas */,
@@ -191,7 +191,7 @@
 				B637FE541BCA146A004DFE4D /* items.atlas in Resources */,
 				B637FE4D1BC95C95004DFE4D /* bg.png in Resources */,
 				B637FE531BCA146A004DFE4D /* misc.atlas in Resources */,
-				B6DEDEC01BC8C240000BABCD /* SampleMapKenny.json in Resources */,
+				B6DEDEC01BC8C240000BABCD /* SampleMapKenney.json in Resources */,
 				B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */,
 				B6DEDE511BC3467B000BABCD /* LaunchScreen.storyboard in Resources */,
 				B6DEDE4E1BC3467B000BABCD /* Assets.xcassets in Resources */,
