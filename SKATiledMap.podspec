@@ -18,10 +18,8 @@ Pod::Spec.new do |s|
                }
 
   s.ios.deployment_target = '9.0'
-
   s.requires_arc = true
   s.source_files = 'SKATiledMap'
   s.frameworks  = 'SpriteKit', 'UIKit'
-  s.library = 'z'
   s.xcconfig       = { 'FRAMEWORK_SEARCH_PATHS' => '"$(PODS_ROOT)/"' }
 end
