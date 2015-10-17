@@ -3,6 +3,8 @@ SKATiledMap is a simple solution for creating a map using the free Tiled Map Edi
 
 The Sprite Kit Alliance is happy to provide the SKATiledMap free of charge without any warranty or guarantee (see license below for more info). If there is a feature missing or you would like added please email Skyler at skyler@skymistdevelopment.com.
 
+SKATiledMap is based off the SKAToolKit->SKATiledMap that was written in Objective-C. To view other cool tool visit our git hub page at https://github.com/SpriteKitAlliance
+
 **special thanks to Kenney and his awesome art http://kenney.nl/assets
 
 ##SKAToolKit Install Instructions
