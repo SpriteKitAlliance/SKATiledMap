@@ -1,10 +1,26 @@
 //
 //  SKATiledMap.swift
-//  SKATiledMapExample
 //
 //  Created by Skyler Lauren on 10/5/15.
 //  Copyright © 2015 Sprite Kit Alliance. All rights reserved.
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to
+//  deal in the Software without restriction, including without limitation the
+//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+//  IN THE SOFTWARE.
 
 import Foundation
 import SpriteKit
@@ -254,11 +270,22 @@ class SKATiledMap : SKNode{
     }
     
     /**
-    Returns all the tiles around a specific index for a specific point. Very useful if you need to know
-    about tiles around a specific index.
-    @param index the CGPoint that will be used as a x and y index
-    @param layerNumber the layer in which you would like your tiles
-    */
+     This method is used to get custom named objects that you may have made in Tiled 
+     for spawning enemies, player start positions, or any other custom game logic you 
+     made a object for.
+     */
+    func objectsOn(layerNumber: Int, name: String) -> [SKAObject]?{
+        let objects = objectLayers[layerNumber].objects
+        return  objects.filter({$0.name == name})
+    }
+
+    
+    /**
+     Returns all the tiles around a specific index for a specific point. Very useful if you need to know
+     about tiles around a specific index.
+     @param index the CGPoint that will be used as a x and y index
+     @param layerNumber the layer in which you would like your tiles
+     */
     func tilesAround(index : CGPoint, layerNumber : Int)-> [SKASprite?]{
         
         let x = Int(index.x)
@@ -308,11 +335,11 @@ class SKATiledMap : SKNode{
     }
     
     /**
-    Convientent method to quickly get a specific tile for a specific layer on the map
-    @param layerNumber the layer in which you would like to use
-    @param x the x index to use
-    @param y the y index to use
-    */
+     Convientent method to quickly get a specific tile for a specific layer on the map
+     @param layerNumber the layer in which you would like to use
+     @param x the x index to use
+     @param y the y index to use
+     */
     func spriteFor(layerNumber : Int, x : Int, y : Int) -> SKASprite{
         let layer = spriteLayers[layerNumber]
         let sprite = layer.sprites[x][y]

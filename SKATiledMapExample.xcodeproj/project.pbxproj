@@ -63,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B62A4BC81BD20AB000272644 /* SKATestNodes */ = {
+			isa = PBXGroup;
+			children = (
+				B637FE561BCABA5A004DFE4D /* SKATestHud.swift */,
+				B637FE581BCABF03004DFE4D /* SKATestPlayer.swift */,
+			);
+			name = SKATestNodes;
+			sourceTree = "<group>";
+		};
 		B6DEDE361BC3467B000BABCD = {
 			isa = PBXGroup;
 			children = (
@@ -82,12 +91,11 @@
 		B6DEDE411BC3467B000BABCD /* SKATiledMapExample */ = {
 			isa = PBXGroup;
 			children = (
-				B6DEDE671BC3F316000BABCD /* SKATiledMap */,
 				B6DEDE421BC3467B000BABCD /* AppDelegate.swift */,
-				B6DEDE461BC3467B000BABCD /* GameScene.swift */,
-				B637FE561BCABA5A004DFE4D /* SKATestHud.swift */,
-				B637FE581BCABF03004DFE4D /* SKATestPlayer.swift */,
 				B6DEDE481BC3467B000BABCD /* GameViewController.swift */,
+				B6DEDE461BC3467B000BABCD /* GameScene.swift */,
+				B6DEDE671BC3F316000BABCD /* SKATiledMap */,
+				B62A4BC81BD20AB000272644 /* SKATestNodes */,
 				B6DEDEBE1BC8C240000BABCD /* Resources */,
 				B6DEDE4A1BC3467B000BABCD /* Main.storyboard */,
 				B6DEDE4D1BC3467B000BABCD /* Assets.xcassets */,

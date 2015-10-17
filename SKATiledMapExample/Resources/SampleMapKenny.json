@@ -40,7 +40,7 @@
          "objects":[
                 {
                  "height":18,
-                 "name":"",
+                 "name":"startingPlatform",
                  "properties":
                     {
                      "SKACollisionType":"SKACollisionTypeRect"
@@ -347,75 +347,75 @@
             {
              "0":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sand.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sand.png"
                 },
              "1":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCenter_rounded.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCenter_rounded.png"
                 },
              "10":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf_mid.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf_mid.png"
                 },
              "11":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf_right.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf_right.png"
                 },
              "12":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf.png"
                 },
              "13":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHill_left.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHill_left.png"
                 },
              "14":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHill_right.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHill_right.png"
                 },
              "15":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandLeft.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandLeft.png"
                 },
              "16":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandMid.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandMid.png"
                 },
              "17":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandRight.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandRight.png"
                 },
              "2":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCenter.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCenter.png"
                 },
              "3":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliff_left.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliff_left.png"
                 },
              "4":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliff_right.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliff_right.png"
                 },
              "5":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliffAlt_left.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliffAlt_left.png"
                 },
              "6":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliffAlt_right.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCliffAlt_right.png"
                 },
              "7":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCorner_leftg.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCorner_leftg.png"
                 },
              "8":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCorner_right.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandCorner_right.png"
                 },
              "9":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf_left.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/platforms.atlas\/sandHalf_left.png"
                 }
             },
          "tilewidth":64
@@ -434,99 +434,99 @@
             {
              "0":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/coinBronze.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/coinBronze.png"
                 },
              "1":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/coinGold.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/coinGold.png"
                 },
              "10":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagRed1.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagRed1.png"
                 },
              "11":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagRed2.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagRed2.png"
                 },
              "12":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagYellow_down.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagYellow_down.png"
                 },
              "13":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagYellow1.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagYellow1.png"
                 },
              "14":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagYellow2.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagYellow2.png"
                 },
              "15":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemBlue.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemBlue.png"
                 },
              "16":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemGreen.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemGreen.png"
                 },
              "17":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemRed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemRed.png"
                 },
              "18":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemYellow.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/gemYellow.png"
                 },
              "19":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyBlue.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyBlue.png"
                 },
              "2":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/coinSilver.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/coinSilver.png"
                 },
              "20":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyGreen.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyGreen.png"
                 },
              "21":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyRed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyRed.png"
                 },
              "22":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyYellow.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/keyYellow.png"
                 },
              "23":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/star.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/star.png"
                 },
              "3":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagBlue_down.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagBlue_down.png"
                 },
              "4":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagBlue1.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagBlue1.png"
                 },
              "5":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagBlue2.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagBlue2.png"
                 },
              "6":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagGreen_down.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagGreen_down.png"
                 },
              "7":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagGreen1.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagGreen1.png"
                 },
              "8":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagGreen2.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagGreen2.png"
                 },
              "9":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagRed_down.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/items.atlas\/flagRed_down.png"
                 }
             },
          "tilewidth":64
@@ -545,298 +545,298 @@
             {
              "0":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bombWhite.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bombWhite.png"
                 },
              "1":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin_boxed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin_boxed.png"
                 },
              "10":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxExplosive_used.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxExplosive_used.png"
                 },
              "11":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxExplosive.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxExplosive.png"
                 },
              "12":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem_boxed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem_boxed.png"
                 },
              "13":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem_disabled_boxed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem_disabled_boxed.png"
                 },
              "14":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem_disabled.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem_disabled.png"
                 },
              "15":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxItem.png"
                 },
              "16":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/brickBrown.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/brickBrown.png"
                 },
              "17":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/brickGrey.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/brickGrey.png"
                 },
              "18":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bridgeA.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bridgeA.png"
                 },
              "19":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bridgeB.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bridgeB.png"
                 },
              "2":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin_disabled_boxed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin_disabled_boxed.png"
                 },
              "20":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bush.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bush.png"
                 },
              "21":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/cactus.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/cactus.png"
                 },
              "22":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/chain.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/chain.png"
                 },
              "23":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorClosed_mid.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorClosed_mid.png"
                 },
              "24":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorClosed_top.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorClosed_top.png"
                 },
              "25":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorOpen_mid.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorOpen_mid.png"
                 },
              "26":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorOpen_top.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/doorOpen_top.png"
                 },
              "27":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/fence.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/fence.png"
                 },
              "28":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/fenceBroken.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/fenceBroken.png"
                 },
              "29":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/grass.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/grass.png"
                 },
              "3":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin_disabled.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin_disabled.png"
                 },
              "30":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/ladderMid.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/ladderMid.png"
                 },
              "31":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/ladderTop.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/ladderTop.png"
                 },
              "32":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lava.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lava.png"
                 },
              "33":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lavaTop_high.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lavaTop_high.png"
                 },
              "34":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lavaTop_low.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lavaTop_low.png"
                 },
              "35":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/leverLeft.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/leverLeft.png"
                 },
              "36":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/leverMid.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/leverMid.png"
                 },
              "37":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/leverRight.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/leverRight.png"
                 },
              "38":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockBlue.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockBlue.png"
                 },
              "39":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockGreen.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockGreen.png"
                 },
              "4":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCoin.png"
                 },
              "40":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockRed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockRed.png"
                 },
              "41":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockYellow.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/lockYellow.png"
                 },
              "42":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/mushroomBrown.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/mushroomBrown.png"
                 },
              "43":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/mushroomRed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/mushroomRed.png"
                 },
              "44":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/plantPurple.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/plantPurple.png"
                 },
              "45":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/rock.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/rock.png"
                 },
              "46":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/sign.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/sign.png"
                 },
              "47":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/signExit.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/signExit.png"
                 },
              "48":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/signLeft.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/signLeft.png"
                 },
              "49":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/signRight.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/signRight.png"
                 },
              "5":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate_double.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate_double.png"
                 },
              "50":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/snow.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/snow.png"
                 },
              "51":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/spikes.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/spikes.png"
                 },
              "52":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/spring.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/spring.png"
                 },
              "53":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/sprung.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/sprung.png"
                 },
              "54":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchBlue_pressed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchBlue_pressed.png"
                 },
              "55":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchBlue.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchBlue.png"
                 },
              "56":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchGreen_pressed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchGreen_pressed.png"
                 },
              "57":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchGreen.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchGreen.png"
                 },
              "58":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchRed_pressed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchRed_pressed.png"
                 },
              "59":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchRed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchRed.png"
                 },
              "6":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate_single.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate_single.png"
                 },
              "60":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchYellow_pressed.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchYellow_pressed.png"
                 },
              "61":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchYellow.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/switchYellow.png"
                 },
              "62":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/torch1.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/torch1.png"
                 },
              "63":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/torch2.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/torch2.png"
                 },
              "64":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/torchOff.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/torchOff.png"
                 },
              "65":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/water.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/water.png"
                 },
              "66":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/waterTop_high.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/waterTop_high.png"
                 },
              "67":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/waterTop_low.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/waterTop_low.png"
                 },
              "68":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/weight.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/weight.png"
                 },
              "69":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/weightAttached.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/weightAttached.png"
                 },
              "7":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate_warning.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate_warning.png"
                 },
              "70":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/window.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/window.png"
                 },
              "71":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bomb.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/bomb.png"
                 },
              "8":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxCrate.png"
                 },
              "9":
                 {
-                 "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxExplosive_disabled.png"
+                 "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/misc.atlas\/boxExplosive_disabled.png"
                 }
             },
          "tilewidth":64
         }, 
         {
          "firstgid":115,
-         "image":"..\/iOS\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/bg.png",
+         "image":"..\/..\/..\/SKAToolKit\/Example\/SKAToolKitExample\/Resources\/bg.png",
          "imageheight":256,
          "imagewidth":256,
          "margin":0,
