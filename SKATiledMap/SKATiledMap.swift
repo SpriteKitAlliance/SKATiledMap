@@ -117,9 +117,7 @@ class SKATiledMap : SKNode{
         //checks for tmx first then trys json if a tmx file can not be found
         if let filePath = NSBundle.mainBundle().pathForResource(fileName, ofType: "tmx"){
             tmxParser = SKATMXParser(filePath:filePath)
-            //currently tmx files are not supported but will be in the near future
-            print("Sorry TMX files are not supported yet \(filePath)")
-            return
+            loadMap((tmxParser?.mapDictionary)!)
         }
         else
         {

@@ -16,7 +16,7 @@ now load your map by calling...
      let map = SKATiledMap(mapName: "SampleMapKenney") //name of your JSON file
 
 ##SKATiledMap
-This is a sprite node that represents a map created in Tiled. Currently SKATiledMap only supports JSON format (tmx support coming soon). It also only supports orthogonal maps currently. If there is enough need we hope to add isometric support in the future.
+This is a sprite node that represents a map created in Tiled. Currently SKATiledMap only supports JSON and TMX formats. It also only supports orthogonal maps currently. If there is enough need we hope to add isometric support in the future.
 
 Add the JSON file and any images(see resolution support) used for your tiles into your project. To save your tiled map as JSON go to File->Export As in tiled and select .json
 
@@ -31,7 +31,18 @@ Tiled supports collection tilesets. **Make sure you design your map with 1x grap
 ###Supported Map Types
 
 ####TMX
-TMX support is coming soon
+TMX is in early beta and only supports csv Tile Layer Format. Before saving your tmx map go to Map->Map Options->Map->Tile Layer Format and set it to CSV
+
+![LayerFormat](Documentation/layerformat.png)
+
+Import your tmx map into your app and make sure you locate all images you used for your map and import those along with any @2x and @3x version of those images (if using normal tilesets) or create atlas folders (if using collection tilesets). See Resolution Support for more info.
+
+To create a map it is a simple matter of calling this method.
+
+
+        let map = SKATiledMap(mapName: "SampleMapKenney") //name of your tmx file
+
+
     
 ####JSON
 SKATileMap supports Tiled Maps that are exported in the JSON format. In Tiled export your map as a JSON file and import it into your app. To save as .json when in tiled go to File->Export As and select JSON. Make sure you locate all images you used for your map and import those along with any @2x and @3x version of those images (if using normal tilesets) or create atlas folders (if using collection tilesets). See Resolution Support for more info.

@@ -14,7 +14,9 @@ let kTile = "tile"
 let kImage = "image"
 let kLayer = "layer"
 let kData = "data"
-
+let kObjectGroup = "objectgroup"
+let kObject = "object"
+let kProperty = "property"
 let kProperies = "properties"
 
 class SKATMXParser : NSObject, NSXMLParserDelegate {
@@ -25,23 +27,30 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
     }
     
     var parser = NSXMLParser()
-    var mapDictionary = [String : AnyObject]()
+    var mapDictionary = ["properties" : [String: AnyObject]()] as [String : AnyObject]
 
     var tileSets = [[String: AnyObject]]()
     var tileSet = [String: AnyObject]()
     
     var tileID = ""
-    var tiles = [[String: AnyObject]]()
+    var tiles = [String: AnyObject]()
     var tile = [String: AnyObject]()
     
     var layers = [[String: AnyObject]]()
     var layer = [String: AnyObject]()
-    
     var data = [String : AnyObject]()
+    
+    var objectLayers = [[String: AnyObject]]()
+    var objectLayer = [String: AnyObject]()
+    var objects = [[String: AnyObject]]()
+    var object = [String: AnyObject]()
+    
+    var properties = [String: AnyObject]()
     
     init(filePath : String){
         
         super.init()
+        
         //attemps to return convert json file over to a key value pairs
         do{
             let tmxData = try NSData(contentsOfFile: filePath, options: .DataReadingMappedIfSafe)
@@ -74,14 +83,15 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
             break
             
             case kTileset :
-                tileSet = attributeDict
+                tileSet = newTileset()
+                for (key, value) in attributeDict{
+                    tileSet[key] = value
+                }
+
+                tiles = [String : AnyObject]()
             break
             
             case kTile :
-                
-                if(tileID != ""){
-                    print("THIS IS UNEXPECTED")
-                }
                 for (_, value) in attributeDict{
                     tileID = value
                 }
@@ -89,22 +99,62 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
             
             case kImage :
                 if(tileID != ""){
-                    tile = [tileID : attributeDict]
+                    tile = attributeDict
+                }
+                else{
+                    for (key, value) in attributeDict{
+                        if key == "width" {
+                            tileSet["imagewidth"] = value
+                        }
+                        else if key == "height"{
+                            tileSet["imageheight"] = value
+                        }
+                        else{
+                            tileSet[key] = value
+                        }
+                    }
                 }
             break
             
             case kLayer :
-                layer = attributeDict
+                layer = newSpriteLayer()
+                for (key, value) in attributeDict{
+                    layer[key] = value
+                }
             break
             
             case kData:
                 data = attributeDict
             break
             
-
+            case kObjectGroup :
+                objectLayer = newObjectLayer()
+                for (key, value) in attributeDict{
+                    objectLayer[key] = value
+                }
+            break
+            
+            case kObject :
+                object = newObject()
+                for (key, value) in attributeDict{
+                    object[key] = value
+                }
+            break
+            
+            case kProperty:
+                if let key = attributeDict["name"]{
+                    if let value = attributeDict["value"]{
+                        properties[key] = value
+                    }
+                }
+            break
+            
+            case kProperies:
+                properties = [String: AnyObject]()
+            break
             
         default :
-            print("unexpected name found: \(elementName)")
+            print("unexpected name found: \(elementName)\nAttr: \(attributeDict)")
             break
         }
     
@@ -113,7 +163,20 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, foundCharacters string: String) {
         
         if data.keys.count > 0{
-            print("This will be fun: \(string)")
+            if data["encoding"] as? String == "csv"{
+                let numberString = string.stringByReplacingOccurrencesOfString("\n", withString: "")
+                let numbers = numberString.componentsSeparatedByString(",")
+                
+                var tileIDs = [Int]()
+                
+                for number in numbers{
+                    tileIDs.append(Int(number)!)
+                }
+                layer["data"] = tileIDs
+            }
+            else{
+                fatalError("Error: tmx only support csv layer format. Before saving tmx go to Map->Map Options->Map->Tile Layer Format and chaning to csv")
+            }
         }
     }
     
@@ -124,24 +187,34 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
                 if(tiles.count > 0){
                     tileSet["tiles"] = tiles
                 }
-                tileSets.append(tileSet)
+                tileSets.append(cleanDictionary(tileSet))
             break
             
             case kTile:
-                tiles.append(tile)
+                tiles[tileID] = (cleanDictionary(tile))
                 tileID = ""
             break
             
             case kLayer:
-                layers.append(layer)
+                layers.append(cleanDictionary(layer))
             break
             
             case kData:
-                layer["data"] = data
                 data = [String : AnyObject]()
             break
             
+            case kObject:
+                objects.append(cleanDictionary(object))
+            break
             
+            case kObjectGroup:
+                objectLayer["objects"] = objects
+                layers.append(objectLayer)
+            break
+            
+            case kProperies:
+                object["properties"] = properties
+            break
             
             default:
                 break
@@ -153,6 +226,51 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
         mapDictionary["tilesets"] = tileSets
         mapDictionary["layers"] = layers
         print(mapDictionary)
+        
+        mapDictionary = cleanDictionary(mapDictionary)
+    }
+    
+    func newObject() -> [String: AnyObject]{
+        return ["x": "0", "y": "0", "width": "0", "height": "0", "type": "", "name": "pizza", "rotation": 0.0, "visible": true]
+    }
+    
+    func newObjectLayer() -> [String: AnyObject]{
+        return ["x": 0, "y": 0, "width": 0, "height": 0, "type": "", "name": "", "opacity": 0.0, "visible": true, "draworder": "topdown"]
+    }
+    
+    func newSpriteLayer() -> [String: AnyObject]{
+        return ["x": 0, "y": 0, "width": 0, "height": 0, "type": "", "name": "", "opacity": 0.0, "visible": true, "draworder": "topdown"]
+    }
+    
+    func newTileset() -> [String : AnyObject]{
+        return ["spacing": 0, "margin": 0];
+    }
+    
+    func cleanDictionary(dictionary: [String : AnyObject]) -> [String : AnyObject] {
+        var dictCopy = dictionary
+        let intTypes = ["width", "height", "x", "y", "tilewidth", "tileheight", "firstgid", "imagewidth", "imageheight", "spacing", "margin"]
+        let floatTypes = ["opacity", "rotation"]
+        let boolTypes = ["visible"]
+        
+        for (key, value) in dictionary where value is String{
+            //clean expected Ints
+            for intType in intTypes where intType == key {
+                dictCopy[key] = Int(Float(value as! String)!)
+            }
+            for floatType in floatTypes where floatType == key {
+                dictCopy[key] = Float(value as! String)
+            }
+            for boolType in boolTypes where boolType == key {
+                dictCopy[key] = Int(value as! String) == 1
+            }
+        }
+        
+        if let image = dictCopy["source"] as? String{
+            dictCopy["image"] = image
+            dictCopy["source"] = nil
+        }
+        
+        return dictCopy
     }
     
     required init?(coder aDecoder: NSCoder) {
