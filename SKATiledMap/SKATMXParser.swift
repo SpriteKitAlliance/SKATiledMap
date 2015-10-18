@@ -72,7 +72,7 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
         
         super.init()
         
-        //attemps to return convert json file over to a key value pairs
+        //attemps to load tmx as xml
         do{
             let tmxData = try NSData(contentsOfFile: filePath, options: .DataReadingMappedIfSafe)
             
@@ -93,181 +93,28 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
         parser.parse()
     }
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        
-
-        switch elementName{
-            case kMap :
-                for (key, value) in attributeDict{
-                    mapDictionary[key] = value
-                }
-            break
-            
-            case kTileset :
-                tileSet = newTileset()
-                for (key, value) in attributeDict{
-                    tileSet[key] = value
-                }
-
-                tiles = [String : AnyObject]()
-            break
-            
-            case kTile :
-                for (_, value) in attributeDict{
-                    tileID = value
-                }
-            break
-            
-            case kImage :
-                if(tileID != ""){
-                    tile = attributeDict
-                }
-                else{
-                    for (key, value) in attributeDict{
-                        if key == "width" {
-                            tileSet["imagewidth"] = value
-                        }
-                        else if key == "height"{
-                            tileSet["imageheight"] = value
-                        }
-                        else{
-                            tileSet[key] = value
-                        }
-                    }
-                }
-            break
-            
-            case kLayer :
-                layer = newSpriteLayer()
-                for (key, value) in attributeDict{
-                    layer[key] = value
-                }
-            break
-            
-            case kData:
-                data = attributeDict
-            break
-            
-            case kObjectGroup :
-                objectLayer = newObjectLayer()
-                for (key, value) in attributeDict{
-                    objectLayer[key] = value
-                }
-            break
-            
-            case kObject :
-                object = newObject()
-                for (key, value) in attributeDict{
-                    object[key] = value
-                }
-            break
-            
-            case kProperty:
-                if let key = attributeDict["name"]{
-                    if let value = attributeDict["value"]{
-                        properties[key] = value
-                    }
-                }
-            break
-            
-            case kProperies:
-                properties = [String: AnyObject]()
-            break
-            
-        default :
-            print("unexpected name found: \(elementName)\nAttr: \(attributeDict)")
-            break
-        }
-    
-    }
-    
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
-        
-        if data.keys.count > 0{
-            if data["encoding"] as? String == "csv"{
-                let numberString = string.stringByReplacingOccurrencesOfString("\n", withString: "")
-                let numbers = numberString.componentsSeparatedByString(",")
-                
-                var tileIDs = [Int]()
-                
-                for number in numbers{
-                    tileIDs.append(Int(number)!)
-                }
-                layer["data"] = tileIDs
-            }
-            else{
-                fatalError("Error: tmx only support csv layer format. Before saving tmx go to Map->Map Options->Map->Tile Layer Format and chaning to csv")
-            }
-        }
-    }
-    
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        
-        switch elementName{
-            case kTileset:
-                if(tiles.count > 0){
-                    tileSet["tiles"] = tiles
-                }
-                tileSets.append(cleanDictionary(tileSet))
-            break
-            
-            case kTile:
-                tiles[tileID] = (cleanDictionary(tile))
-                tileID = ""
-            break
-            
-            case kLayer:
-                layers.append(cleanDictionary(layer))
-            break
-            
-            case kData:
-                data = [String : AnyObject]()
-            break
-            
-            case kObject:
-                objects.append(cleanDictionary(object))
-            break
-            
-            case kObjectGroup:
-                objectLayer["objects"] = objects
-                layers.append(objectLayer)
-            break
-            
-            case kProperies:
-                object["properties"] = properties
-            break
-            
-            default:
-                break
-        }
-    }
-    
-    func parserDidEndDocument(parser: NSXMLParser) {
-        
-        mapDictionary["tilesets"] = tileSets
-        mapDictionary["layers"] = layers
-        print(mapDictionary)
-        
-        mapDictionary = cleanDictionary(mapDictionary)
-    }
-    
-    func newObject() -> [String: AnyObject]{
+    //MARK: - Required Default Setters For Parsing
+    private func newObject() -> [String: AnyObject]{
         return ["x": "0", "y": "0", "width": "0", "height": "0", "type": "", "name": "pizza", "rotation": 0.0, "visible": true]
     }
     
-    func newObjectLayer() -> [String: AnyObject]{
+    private func newObjectLayer() -> [String: AnyObject]{
         return ["x": 0, "y": 0, "width": 0, "height": 0, "type": "", "name": "", "opacity": 0.0, "visible": true, "draworder": "topdown"]
     }
     
-    func newSpriteLayer() -> [String: AnyObject]{
+    private func newSpriteLayer() -> [String: AnyObject]{
         return ["x": 0, "y": 0, "width": 0, "height": 0, "type": "", "name": "", "opacity": 0.0, "visible": true, "draworder": "topdown"]
     }
     
-    func newTileset() -> [String : AnyObject]{
+    private func newTileset() -> [String : AnyObject]{
         return ["spacing": 0, "margin": 0];
     }
     
-    func cleanDictionary(dictionary: [String : AnyObject]) -> [String : AnyObject] {
+    //MARK: - Clean Up Methods
+    /**
+    XML Parser returns strings so we need to convert and clean where needed
+    */
+    private func cleanDictionary(dictionary: [String : AnyObject]) -> [String : AnyObject] {
         var dictCopy = dictionary
         let intTypes = ["width", "height", "x", "y", "tilewidth", "tileheight", "firstgid", "imagewidth", "imageheight", "spacing", "margin"]
         let floatTypes = ["opacity", "rotation"]
@@ -294,6 +141,160 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
         return dictCopy
     }
     
+    //MARK: - NSXMLParserDelegate Methods
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        
+        //Filling correct data holders based on element name
+        //When appropriate data holders are prefilled with required values that may not be in xml
+        switch elementName{
+            
+        case kMap :
+            for (key, value) in attributeDict{
+                mapDictionary[key] = value
+            }
+        
+        case kTileset :
+            tileSet = newTileset()
+            for (key, value) in attributeDict{
+                tileSet[key] = value
+            }
+        //reseting tiles because we are starting a new set
+        tiles = [String : AnyObject]()
+        
+        case kTile :
+            //we only care about the id
+            for (_, value) in attributeDict{
+                tileID = value
+            }
+        
+        case kImage :
+            //tileId will be present if it is an image collection tile set
+            if(tileID != ""){
+                tile = attributeDict
+            }
+            //If no tileID is presnet it is a sprite sheet with additional values
+            else{
+                //for whatever reason json sets these values different than xml so 
+                //they are converted to match json values
+                for (key, value) in attributeDict{
+                    if key == "width" {
+                        tileSet["imagewidth"] = value
+                    }
+                    else if key == "height"{
+                        tileSet["imageheight"] = value
+                    }
+                    else{
+                        tileSet[key] = value
+                    }
+                }
+            }
+        
+        case kLayer :
+            layer = newSpriteLayer()
+            for (key, value) in attributeDict{
+                layer[key] = value
+            }
+        
+        case kData:
+            data = attributeDict
+        
+        case kObjectGroup :
+            objectLayer = newObjectLayer()
+            for (key, value) in attributeDict{
+                objectLayer[key] = value
+            }
+        
+        case kObject :
+            object = newObject()
+            for (key, value) in attributeDict{
+                object[key] = value
+            }
+        
+        case kProperty:
+            if let key = attributeDict["name"]{
+                if let value = attributeDict["value"]{
+                    properties[key] = value
+                }
+            }
+        
+        case kProperies:
+            properties = [String: AnyObject]()
+        
+        default :
+            print("unexpected name found: \(elementName)\nAttr: \(attributeDict)")
+        }
+    }
+    
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
+        
+        //this gets called for every element but only data encoding matters
+        if let encoding = data["encoding"] as? String{
+            if encoding == "csv"{
+                //converting csv to something useful
+                let numberString = string.stringByReplacingOccurrencesOfString("\n", withString: "")
+                let numbers = numberString.componentsSeparatedByString(",")
+                
+                var tileIDs = [Int]()
+                
+                for number in numbers{
+                    tileIDs.append(Int(number)!)
+                }
+                layer["data"] = tileIDs
+            }
+            else{
+                fatalError("Error: tmx only support csv layer format. Before saving tmx go to Map->Map Options->Map->Tile Layer Format and chaning to csv")
+            }
+        }
+    }
+    
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        
+        //Setting and cleaning up elements
+        switch elementName{
+            case kTileset:
+                if(tiles.count > 0){
+                    tileSet["tiles"] = tiles
+                }
+                tileSets.append(cleanDictionary(tileSet))
+            
+            case kTile:
+                tiles[tileID] = (cleanDictionary(tile))
+                tileID = ""
+            
+            case kLayer:
+                layers.append(cleanDictionary(layer))
+            
+            case kData:
+                data = [String : AnyObject]()
+            
+            case kObject:
+                objects.append(cleanDictionary(object))
+            
+            case kObjectGroup:
+                objectLayer["objects"] = objects
+                layers.append(objectLayer)
+            
+            case kProperies:
+                object["properties"] = properties
+            
+            default:
+                break
+        }
+    }
+    
+    func parserDidEndDocument(parser: NSXMLParser) {
+        
+        //final clean up
+        mapDictionary["tilesets"] = tileSets
+        mapDictionary["layers"] = layers
+        mapDictionary = cleanDictionary(mapDictionary)
+    }
+    
+
+    //MARK: - Required Apple Method
+    /**
+     Lame required function for subclassing
+     */
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
