@@ -8,45 +8,66 @@
 
 import Foundation
 
-let kMap = "map"
-let kTileset = "tileset"
-let kTile = "tile"
-let kImage = "image"
-let kLayer = "layer"
-let kData = "data"
-let kObjectGroup = "objectgroup"
-let kObject = "object"
-let kProperty = "property"
-let kProperies = "properties"
-
 class SKATMXParser : NSObject, NSXMLParserDelegate {
     
-    enum ParsingMode{
-       case None
-       case TileSet
-    }
-    
+    //MARK: - Public Properties
     var parser = NSXMLParser()
     var mapDictionary = ["properties" : [String: AnyObject]()] as [String : AnyObject]
+    
+    //MARK: - Private Properties
+    /**
+     Parsing keys
+     */
+    private let kMap = "map"
+    private let kTileset = "tileset"
+    private let kTile = "tile"
+    private let kImage = "image"
+    private let kLayer = "layer"
+    private let kData = "data"
+    private let kObjectGroup = "objectgroup"
+    private let kObject = "object"
+    private let kProperty = "property"
+    private let kProperies = "properties"
 
-    var tileSets = [[String: AnyObject]]()
-    var tileSet = [String: AnyObject]()
+    /**
+     Data holders for tile sets
+     */
+    private var tileSets = [[String: AnyObject]]()
+    private var tileSet = [String: AnyObject]()
     
-    var tileID = ""
-    var tiles = [String: AnyObject]()
-    var tile = [String: AnyObject]()
+    /**
+     Data holders for tile information
+     */
+    private var tileID = ""
+    private var tiles = [String: AnyObject]()
+    private var tile = [String: AnyObject]()
     
-    var layers = [[String: AnyObject]]()
-    var layer = [String: AnyObject]()
-    var data = [String : AnyObject]()
+    /**
+     Data holders layer information
+     */
+    private var layers = [[String: AnyObject]]()
+    private var layer = [String: AnyObject]()
+    private var data = [String : AnyObject]()
     
-    var objectLayers = [[String: AnyObject]]()
-    var objectLayer = [String: AnyObject]()
-    var objects = [[String: AnyObject]]()
-    var object = [String: AnyObject]()
+    /**
+     Dataholders for object layers
+     */
+    private var objectLayers = [[String: AnyObject]]()
+    private var objectLayer = [String: AnyObject]()
     
+    /**
+     Dataholders for objects
+     */
+    private var objects = [[String: AnyObject]]()
+    private var object = [String: AnyObject]()
     var properties = [String: AnyObject]()
     
+    
+    //MARK: - Initializers
+    /**
+    Designated Initializer
+    @param filePath used to locate tmx file
+    */
     init(filePath : String){
         
         super.init()
