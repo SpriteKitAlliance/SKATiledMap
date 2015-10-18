@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'SKATiledMap'
-  s.version  = '0.1.0'
+  s.version  = '0.2.0'
   s.license  = 'MIT'
   s.summary  = 'SKATiledMap is a simple solution for creating a map using the free Tiled Map Editor and supportes .tmx and .json formats.'
   s.homepage = 'http://spritekitalliance.com/'
