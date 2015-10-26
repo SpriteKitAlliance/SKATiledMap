@@ -1,5 +1,5 @@
 #SKATiledMap
-SKATiledMap is a simple solution for creating a map using the free Tiled Map Editor and supportes .tmx and .json formats http://www.mapeditor.org/. SKATiledMap is written in Swift 1.2 and created in Xcode 7.
+SKATiledMap is a simple solution for creating a map using the free Tiled Map Editor and supportes .tmx and .json formats http://www.mapeditor.org/. SKATiledMap is written in Swift 2.0 and created in Xcode 7.
 
 The Sprite Kit Alliance is happy to provide the SKATiledMap free of charge without any warranty or guarantee (see license below for more info). If there is a feature missing or you would like added please email Skyler at skyler@skymistdevelopment.com.
 
