@@ -2,7 +2,7 @@
 All notable changes to SKATiledMap will be documented in this file.
 
 #### 0.2.x Releases
-- `0.2.x` Releases - [0.2.3](#0.2.3) | [0.2.2](#0.2.2) | [0.2.1](#0.2.1) | [0.2.0](#0.2.0)
+- `0.2.x` Releases - [0.2.3](#023) | [0.2.2](#022) | [0.2.1](#021) | [0.2.0](#020)
 
 ## [0.2.3](https://github.com/SpriteKitAlliance/SKATiledMap/tree/0.2.3)
 Released on 2015-11-10.
