@@ -162,6 +162,7 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
         tiles = [String : AnyObject]()
         
         case kTile :
+            tile = [String: AnyObject]()
             //we only care about the id
             for (_, value) in attributeDict{
                 tileID = value
@@ -254,11 +255,22 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
             case kTileset:
                 if(tiles.count > 0){
                     tileSet["tiles"] = tiles
+                    tileSet["tileproperties"] = tiles
                 }
                 tileSets.append(cleanDictionary(tileSet))
             
             case kTile:
+                
+                if(properties.count > 0){
+                    for (key, value) in properties{
+                        tile[key] = value
+                    }
+                    
+                    properties = [String: AnyObject]()
+                }
+                
                 tiles[tileID] = (cleanDictionary(tile))
+                
                 tileID = ""
             
             case kLayer:
