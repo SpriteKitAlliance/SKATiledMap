@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B62A4BCA1BD2959400272644 /* SKATMXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A4BC91BD2959400272644 /* SKATMXParser.swift */; settings = {ASSET_TAGS = (); }; };
-		B62A4BCC1BD2994900272644 /* SampleMapKenney.tmx in Resources */ = {isa = PBXBuildFile; fileRef = B62A4BCB1BD2994900272644 /* SampleMapKenney.tmx */; settings = {ASSET_TAGS = (); }; };
-		B637FE4D1BC95C95004DFE4D /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4C1BC95C95004DFE4D /* bg.png */; settings = {ASSET_TAGS = (); }; };
-		B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4E1BCA146A004DFE4D /* platforms.atlas */; settings = {ASSET_TAGS = (); }; };
-		B637FE531BCA146A004DFE4D /* misc.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4F1BCA146A004DFE4D /* misc.atlas */; settings = {ASSET_TAGS = (); }; };
-		B637FE541BCA146A004DFE4D /* items.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE501BCA146A004DFE4D /* items.atlas */; settings = {ASSET_TAGS = (); }; };
-		B637FE571BCABA5A004DFE4D /* SKATestHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637FE561BCABA5A004DFE4D /* SKATestHud.swift */; settings = {ASSET_TAGS = (); }; };
-		B637FE591BCABF03004DFE4D /* SKATestPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637FE581BCABF03004DFE4D /* SKATestPlayer.swift */; settings = {ASSET_TAGS = (); }; };
+		B62A4BCA1BD2959400272644 /* SKATMXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62A4BC91BD2959400272644 /* SKATMXParser.swift */; };
+		B62A4BCC1BD2994900272644 /* SampleMapKenney.tmx in Resources */ = {isa = PBXBuildFile; fileRef = B62A4BCB1BD2994900272644 /* SampleMapKenney.tmx */; };
+		B637FE4D1BC95C95004DFE4D /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4C1BC95C95004DFE4D /* bg.png */; };
+		B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4E1BCA146A004DFE4D /* platforms.atlas */; };
+		B637FE531BCA146A004DFE4D /* misc.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE4F1BCA146A004DFE4D /* misc.atlas */; };
+		B637FE541BCA146A004DFE4D /* items.atlas in Resources */ = {isa = PBXBuildFile; fileRef = B637FE501BCA146A004DFE4D /* items.atlas */; };
+		B637FE571BCABA5A004DFE4D /* SKATestHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637FE561BCABA5A004DFE4D /* SKATestHud.swift */; };
+		B637FE591BCABF03004DFE4D /* SKATestPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637FE581BCABF03004DFE4D /* SKATestPlayer.swift */; };
+		B67EEF2E1BF2DA0F007D07AC /* SampleJSONMapKenney.json in Resources */ = {isa = PBXBuildFile; fileRef = B67EEF2D1BF2DA0F007D07AC /* SampleJSONMapKenney.json */; };
 		B6DEDE431BC3467B000BABCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE421BC3467B000BABCD /* AppDelegate.swift */; };
 		B6DEDE471BC3467B000BABCD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE461BC3467B000BABCD /* GameScene.swift */; };
 		B6DEDE491BC3467B000BABCD /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE481BC3467B000BABCD /* GameViewController.swift */; };
@@ -26,8 +27,7 @@
 		B6DEDE721BC3F316000BABCD /* SKASprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */; };
 		B6DEDE731BC3F316000BABCD /* SKASpriteLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */; };
 		B6DEDE741BC3F316000BABCD /* SKATiledMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDE6D1BC3F316000BABCD /* SKATiledMap.swift */; };
-		B6DEDEC01BC8C240000BABCD /* SampleMapKenney.json in Resources */ = {isa = PBXBuildFile; fileRef = B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */; settings = {ASSET_TAGS = (); }; };
-		B6DEDEC21BC94E1F000BABCD /* SKAMapTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */; settings = {ASSET_TAGS = (); }; };
+		B6DEDEC21BC94E1F000BABCD /* SKAMapTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +39,7 @@
 		B637FE501BCA146A004DFE4D /* items.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = items.atlas; sourceTree = "<group>"; };
 		B637FE561BCABA5A004DFE4D /* SKATestHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKATestHud.swift; sourceTree = "<group>"; };
 		B637FE581BCABF03004DFE4D /* SKATestPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKATestPlayer.swift; sourceTree = "<group>"; };
+		B67EEF2D1BF2DA0F007D07AC /* SampleJSONMapKenney.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleJSONMapKenney.json; sourceTree = "<group>"; };
 		B6DEDE3F1BC3467B000BABCD /* SKATiledMapExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKATiledMapExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DEDE421BC3467B000BABCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6DEDE461BC3467B000BABCD /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -52,7 +53,6 @@
 		B6DEDE6B1BC3F316000BABCD /* SKASprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKASprite.swift; sourceTree = "<group>"; };
 		B6DEDE6C1BC3F316000BABCD /* SKASpriteLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKASpriteLayer.swift; sourceTree = "<group>"; };
 		B6DEDE6D1BC3F316000BABCD /* SKATiledMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKATiledMap.swift; sourceTree = "<group>"; };
-		B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleMapKenney.json; sourceTree = "<group>"; };
 		B6DEDEC11BC94E1F000BABCD /* SKAMapTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKAMapTile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,9 +126,9 @@
 		B6DEDEBE1BC8C240000BABCD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B67EEF2D1BF2DA0F007D07AC /* SampleJSONMapKenney.json */,
 				B62A4BCB1BD2994900272644 /* SampleMapKenney.tmx */,
 				B637FE4C1BC95C95004DFE4D /* bg.png */,
-				B6DEDEBF1BC8C240000BABCD /* SampleMapKenney.json */,
 				B637FE4E1BCA146A004DFE4D /* platforms.atlas */,
 				B637FE4F1BCA146A004DFE4D /* misc.atlas */,
 				B637FE501BCA146A004DFE4D /* items.atlas */,
@@ -198,7 +198,7 @@
 				B637FE4D1BC95C95004DFE4D /* bg.png in Resources */,
 				B637FE531BCA146A004DFE4D /* misc.atlas in Resources */,
 				B62A4BCC1BD2994900272644 /* SampleMapKenney.tmx in Resources */,
-				B6DEDEC01BC8C240000BABCD /* SampleMapKenney.json in Resources */,
+				B67EEF2E1BF2DA0F007D07AC /* SampleJSONMapKenney.json in Resources */,
 				B637FE521BCA146A004DFE4D /* platforms.atlas in Resources */,
 				B6DEDE511BC3467B000BABCD /* LaunchScreen.storyboard in Resources */,
 				B6DEDE4E1BC3467B000BABCD /* Assets.xcassets in Resources */,

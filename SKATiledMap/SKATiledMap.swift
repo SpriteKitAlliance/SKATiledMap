@@ -426,7 +426,7 @@ class SKATiledMap : SKNode{
                 fatalError("Error: tile sets are not properly formatted")
             }
             
-            let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
+            let tilesetProperties = tileSet["tileproperties"] as? [String: AnyObject]
 
             guard let tileWidth = tileSet["tilewidth"] as? Int else{
                 fatalError("Error: tile width for tile set isn't set propertly")
@@ -505,7 +505,7 @@ class SKATiledMap : SKNode{
                     
                     var index = firstIndex
                     
-                    let tilesetProperties = tileSet["tileProperties"] as? [String: AnyObject]
+                    let tilesetProperties = tileSet["tileproperties"] as? [String: AnyObject]
                     
                     for var rowID = 0; rowID < tileRows; ++rowID{
                         
@@ -528,7 +528,7 @@ class SKATiledMap : SKNode{
                             
                             let propertiesKey = String(index-firstIndex)
                             
-                            if (tilesetProperties != nil) {
+                            if (tilesetProperties != nil && tilesetProperties?.count > 0) {
                                 
                                 if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
                                     mapTile.properties = tileProperties
@@ -582,13 +582,12 @@ class SKATiledMap : SKNode{
                             
                             let index = Int(key)! + firstIndex
                             
-                            let propertiesKey = String(firstIndex-index)
-                            
                             let mapTile = SKAMapTile(texture: texture)
+                            mapTile.properties = dict
                             
-                            if (tilesetProperties != nil) {
+                            if (tilesetProperties != nil && tilesetProperties?.count > 0) {
                                 
-                                if let tileProperties = tilesetProperties![propertiesKey] as? [String : AnyObject]{
+                                if let tileProperties = tilesetProperties![key] as? [String : AnyObject]{
                                     mapTile.properties = tileProperties
                                 }
                                 
@@ -650,7 +649,7 @@ class SKATiledMap : SKNode{
                                     
                                     //creating collision body if special SKACollision type is set
                                     if  let properties = sprite.properties{
-                                        if let collisionType = properties["SKACollisionType"]! as? String{
+                                        if let collisionType = properties["SKACollisionType"] as? String{
                                             if collisionType == "SKACollisionTypeRect"{
                                                 sprite.physicsBody = SKPhysicsBody(rectangleOfSize: sprite.size)
                                                 sprite.physicsBody!.dynamic = false
