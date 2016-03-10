@@ -11,6 +11,20 @@ SKATiledMap is based off the SKAToolKit->SKATiledMap that was written in Objecti
 Copy all files in SKAToolKit folder into your project...yup that is it
 ![SKAMiniMap Example](Documentation/import.png)
 
+Alternatively, you can use [Cocoapods](http://cocoadocs.org) :
+
+You want to add pod 'SKATiledMap', '~> 0.2' similar to the following to your Podfile:
+
+    target 'MyApp' do
+        pod 'SKATiledMap', '~> 0.2'
+    end
+
+Then run a pod install inside your terminal, or from CocoaPods.app.
+
+Alternatively to give it a test run, run the command:
+
+    pod try SKATiledMap
+
 now load your map by calling...
 
      let map = SKATiledMap(mapName: "SampleMapKenney") //name of your JSON file
