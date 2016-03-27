@@ -28,6 +28,7 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
     private let kObject = "object"
     private let kProperty = "property"
     private let kProperies = "properties"
+    private let kPolygon = "polygon"
 
     /**
      Data holders for tile sets
@@ -220,6 +221,26 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
         
         case kProperies:
             properties = [String: AnyObject]()
+            
+        case kPolygon:
+            if let pairsString = attributeDict["points"] {
+                
+                var polygons = [[String: Int]]()
+                
+                let pairs = pairsString.componentsSeparatedByString(" ")
+                
+                for pair in pairs{
+                    let xy = pair.componentsSeparatedByString(",")
+                    if xy.count == 2 {
+                        polygons.append(["x": Int(xy[0])!, "y": Int(xy[1])!])
+                        
+                    }else{
+                        fatalError("TMXParser Error: expected x,y pair but got \(xy)")
+                    }
+                }
+                
+                object[kPolygon] = polygons
+            }
         
         default :
             print("unexpected name found: \(elementName)\nAttr: \(attributeDict)")

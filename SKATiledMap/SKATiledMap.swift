@@ -711,7 +711,44 @@ class SKATiledMap : SKNode{
                                             floorSprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
                                             addChild(floorSprite)
                                             collisionSprites.append(floorSprite)
+                                        }else if collisionType == "SKACollisionTypeShape"{
+                                            
+                                            if object.polygon != nil{
+                                                
+                                                let points = object.polygon!
+                                                let myPath = UIBezierPath();
+                                                myPath.moveToPoint(CGPoint(x: 0,y: 0))
+                                                
+                                                for set in points{
+                                                    let x = set["x"]!
+                                                    var y = set["y"]!
+                                                    
+                                                    //getting origin in the correct position based on draw order
+                                                    if(objectLayer.drawOrder == "topdown")
+                                                    {
+                                                        y = -y
+                                                    }
+                                                    
+                                                    if x != 0 && y != 0{
+                                                        myPath.addLineToPoint(CGPoint(x: x,y: y))
+                                                    }
+                                                }
+                                                
+                                                let shapeNode = SKShapeNode(path: myPath.CGPath)
+                                                shapeNode.zPosition = CGFloat(layerNumber)
+                                                let centerX = CGFloat(object.x+object.width/2)
+                                                let centerY = CGFloat(object.y+object.height/2)
+                                                shapeNode.position = CGPointMake(centerX, centerY)
+                                                shapeNode.physicsBody = SKPhysicsBody(polygonFromPath: shapeNode.path!)
+                                                shapeNode.physicsBody?.dynamic = false
+                                                shapeNode.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                                shapeNode.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
+                                                addChild(shapeNode)
+                                                //                                                collisionSprites.append(shapeNode)
+                                                
+                                            }
                                         }
+
                                     }
                                 }
                                 

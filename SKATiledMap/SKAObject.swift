@@ -69,6 +69,8 @@ class SKAObject{
     
     var properties : [String : AnyObject]?
 
+    var polygon : [[String: Int]]?
+
     /**
      Designated Initializer
      @param properties the properties that come from the JSON or TMX file
@@ -106,8 +108,9 @@ class SKAObject{
         }
         height = properties["height"] as! Int
 
-        
         self.properties = properties["properties"] as? [String : AnyObject]
+
+        self.polygon = properties["polygon"] as? [[String: Int]]
 
         guard let _  = properties["rotation"] as? Float else{
             fatalError("Error: required rotation is missing on tile object")
