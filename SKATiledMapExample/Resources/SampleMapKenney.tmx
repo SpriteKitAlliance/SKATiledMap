@@ -472,11 +472,6 @@
     <property name="SKACollisionType" value="SKACollisionTypeRect"/>
    </properties>
   </object>
-  <object x="1346" y="1154" width="252" height="17">
-   <properties>
-    <property name="SKACollisionType" value="SKACollisionTypeRect"/>
-   </properties>
-  </object>
   <object x="1668" y="1024" width="185" height="20">
    <properties>
     <property name="SKACollisionType" value="SKACollisionTypeRect"/>
@@ -547,6 +542,12 @@
     <property name="SKACollisionType" value="SKACollisionTypeShape"/>
    </properties>
    <polygon points="0,0 189,-191 191,-1"/>
+  </object>
+  <object x="1348" y="1155">
+   <properties>
+    <property name="SKACollisionType" value="SKACollisionTypeShape"/>
+   </properties>
+   <polygon points="0,0 -2,14 60,60 60,380 190,380 185,61 251,16 251,-1"/>
   </object>
  </objectgroup>
 </map>

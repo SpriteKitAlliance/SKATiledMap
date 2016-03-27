@@ -23,6 +23,7 @@
 //  IN THE SOFTWARE.
 
 import Foundation
+import SpriteKit
 
 class SKAObjectLayer {
     
@@ -67,9 +68,10 @@ class SKAObjectLayer {
     let name : String
     
     /**
-     SKASprites created if special SKACollisionType is defined on an object
+     SKNode created if special SKACollisionType is defined on an object
+     Note: It can be a SKSpriteNode or a SKShapeNode
      */
-    var collisionSprites = [SKASprite]()
+    var collisionSprites = [SKNode]()
     
     /**
      Array containing any SKAObjects for this layer

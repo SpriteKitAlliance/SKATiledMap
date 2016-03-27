@@ -177,9 +177,9 @@ class SKATiledMap : SKNode{
         
         if(!culledBefore)
         {
-            for var layerIndex = 0; layerIndex < spriteLayers.count; ++layerIndex{
-                for var xIndex = 0; xIndex < mapWidth; ++xIndex{
-                    for var yIndex = 0; yIndex < mapHeight; ++yIndex{
+            for layerIndex in 0 ..< spriteLayers.count{
+                for xIndex in 0 ..< mapWidth{
+                    for yIndex in 0 ..< mapHeight{
                         let sprite = spriteFor(layerIndex, x: xIndex, y: yIndex)
                         sprite.hidden = true
                     }
@@ -239,9 +239,9 @@ class SKATiledMap : SKNode{
             }
             
             //un hiding sprites that need to be rendered
-            for var layerIndex = 0; layerIndex < spriteLayers.count; ++layerIndex{
-                for var xIndex = startingX; xIndex < endingX; ++xIndex{
-                    for var yIndex = startingY; yIndex < endingY; ++yIndex{
+            for layerIndex in 0 ..< spriteLayers.count{
+                for xIndex in startingX ..< endingX{
+                    for yIndex in startingY ..< endingY{
                         let sprite = spriteFor(layerIndex, x: xIndex, y: yIndex)
                         sprite.hidden = false
                         visibleArray.append(sprite)
@@ -507,9 +507,9 @@ class SKATiledMap : SKNode{
                     
                     let tilesetProperties = tileSet["tileproperties"] as? [String: AnyObject]
                     
-                    for var rowID = 0; rowID < tileRows; ++rowID{
+                    for rowID in 0 ..< tileRows{
                         
-                        for var columnID = 0; columnID < tileColumns; ++columnID{
+                        for columnID in 0 ..< tileColumns{
                             
                             // advance based on column
                             let x = CGFloat(marginPercentWidth + Float(columnID) * Float(tileWidthPercent + spacingPercentWidth));
@@ -537,7 +537,7 @@ class SKATiledMap : SKNode{
                             }
                             
                             mapTiles[String(index)] = mapTile
-                            index++;
+                            index += 1;
                         }
                     }
 
@@ -620,7 +620,7 @@ class SKATiledMap : SKNode{
                         var rangeStart = 0
                         let rangeLength = mapWidth-1
                         
-                        for var index = 0; index < mapHeight; ++index{
+                        for index in 0 ..< mapHeight {
                             rangeStart = tileIDs.count - ((index + 1) * mapWidth )
                             
                             let row : [Int] = Array(tileIDs[rangeStart...rangeStart+rangeLength])
@@ -672,7 +672,7 @@ class SKATiledMap : SKNode{
                         addChild(spriteLayer)
                         spriteLayers.append(spriteLayer)
                         
-                        layerNumber++
+                        layerNumber += 1
                     }
                     
                     //determining if we are working with an object layer
@@ -680,7 +680,7 @@ class SKATiledMap : SKNode{
                         
                         //creating an object layer to hold object layer info
                         let objectLayer = SKAObjectLayer(properties: layerDictionary)
-                        var collisionSprites = [SKASprite]()
+                        var collisionSprites = [SKNode]()
                         var objects = [SKAObject]()
                         
                         for objectDictionary in objectsArray{
@@ -744,7 +744,7 @@ class SKATiledMap : SKNode{
                                                 shapeNode.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
                                                 shapeNode.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
                                                 addChild(shapeNode)
-                                                //                                                collisionSprites.append(shapeNode)
+                                                collisionSprites.append(shapeNode)
                                                 
                                             }
                                         }
@@ -760,7 +760,7 @@ class SKATiledMap : SKNode{
                         
                         objectLayer.objects = objects;
                         objectLayers.append(objectLayer)
-                        layerNumber++;
+                        layerNumber += 1;
                     }
                 }
             }
