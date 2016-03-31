@@ -79,6 +79,9 @@
    <image width="64" height="64" source="items.atlas/flagGreen_down.png"/>
   </tile>
   <tile id="7">
+   <properties>
+    <property name="SKACollisionType" value="SKACollisionTypeTexture"/>
+   </properties>
    <image width="64" height="64" source="items.atlas/flagGreen1.png"/>
   </tile>
   <tile id="8">
@@ -192,9 +195,15 @@
    <image width="64" height="64" source="misc.atlas/bridgeB.png"/>
   </tile>
   <tile id="20">
+   <properties>
+    <property name="SKACollisionType" value="SKACollisionTypeTexture"/>
+   </properties>
    <image width="64" height="64" source="misc.atlas/bush.png"/>
   </tile>
   <tile id="21">
+   <properties>
+    <property name="SKACollisionType" value="SKACollisionTypeTexture"/>
+   </properties>
    <image width="64" height="64" source="misc.atlas/cactus.png"/>
   </tile>
   <tile id="22">
@@ -413,6 +422,9 @@
 </data>
  </layer>
  <layer name="items" width="32" height="25">
+  <properties>
+   <property name="SKACollisionType" value="SKACollisionTypeCircle"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -432,10 +444,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,64,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,64,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,20,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,63,0,0,0,0,0,92,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,92,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,20,0,0,0,63,0,0,0,0,63,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
@@ -548,6 +560,12 @@
     <property name="SKACollisionType" value="SKACollisionTypeShape"/>
    </properties>
    <polygon points="0,0 -2,14 60,60 60,380 190,380 185,61 251,16 251,-1"/>
+  </object>
+  <object x="279" y="1262" width="28" height="76">
+   <properties>
+    <property name="SKACollisionType" value="SKACollisionTypeShape"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
 </map>

@@ -70,6 +70,8 @@ class SKAObject{
     var properties : [String : AnyObject]?
 
     var polygon : [[String: Int]]?
+    
+    var isEllipse = false
 
     /**
      Designated Initializer
@@ -121,7 +123,12 @@ class SKAObject{
             fatalError("Error: required visible is missing on tile object")
         }
         visible = properties["visible"] as! Bool
-
+        
+        guard let _  = properties["ellipse"] as? Bool else{
+            fatalError("Error: required ellipse is missing on tile object")
+        }
+        isEllipse = properties["ellipse"] as! Bool
+        
     }
     
 }

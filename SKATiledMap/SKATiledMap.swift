@@ -656,6 +656,23 @@ class SKATiledMap : SKNode{
                                                 sprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
                                                 sprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
                                                 sprite.zPosition = 20;
+                                            } else if collisionType == "SKACollisionTypeTexture"{
+                                                sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
+                                                if sprite.physicsBody != nil{
+                                                    sprite.physicsBody!.dynamic = false
+                                                    sprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                                    sprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
+                                                    sprite.zPosition = 20;
+                                                }else{
+                                                    print("Error creating body from texture: \(sprite.texture)")
+                                                }
+                                               
+                                            } else if collisionType == "SKACollisionTypeCircle"{
+                                                sprite.physicsBody = SKPhysicsBody(circleOfRadius: sprite.size.width/2)
+                                                sprite.physicsBody!.dynamic = false
+                                                sprite.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                                sprite.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
+                                                sprite.zPosition = 20;
                                             }
                                         }
                                     }
@@ -746,6 +763,23 @@ class SKATiledMap : SKNode{
                                                 addChild(shapeNode)
                                                 collisionSprites.append(shapeNode)
                                                 
+                                            } else if object.isEllipse{
+                                                
+                                                let shapeNode = SKShapeNode(ellipseOfSize: CGSize(width: object.width, height:object.height))
+                                                shapeNode.zPosition = CGFloat(layerNumber)
+                                                shapeNode.fillColor = SKColor.clearColor()
+                                                shapeNode.strokeColor = SKColor.clearColor()
+                                                
+                                                let centerX = CGFloat(object.x+object.width/2)
+                                                let centerY = CGFloat(object.y+object.height/2)
+                                                shapeNode.position = CGPointMake(centerX, centerY)
+                                                
+                                                shapeNode.physicsBody = SKPhysicsBody(polygonFromPath: CGPathCreateWithEllipseInRect(CGRectMake(CGFloat(-object.width/2), CGFloat(-object.height/2), CGFloat(object.width), CGFloat(object.height)), nil))
+                                                shapeNode.physicsBody?.dynamic = false
+                                                shapeNode.physicsBody!.categoryBitMask = SKAColliderType.Floor.rawValue;
+                                                shapeNode.physicsBody!.contactTestBitMask = SKAColliderType.Player.rawValue;
+                                                addChild(shapeNode)
+                                                collisionSprites.append(shapeNode)
                                             }
                                         }
 

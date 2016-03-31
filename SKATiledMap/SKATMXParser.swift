@@ -29,6 +29,7 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
     private let kProperty = "property"
     private let kProperies = "properties"
     private let kPolygon = "polygon"
+    private let kEllipse = "ellipse"
 
     /**
      Data holders for tile sets
@@ -96,7 +97,7 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
     
     //MARK: - Required Default Setters For Parsing
     private func newObject() -> [String: AnyObject]{
-        return ["x": "0", "y": "0", "width": "0", "height": "0", "type": "", "name": "pizza", "rotation": 0.0, "visible": true]
+        return ["x": "0", "y": "0", "width": "0", "height": "0", "type": "", "name": "pizza", "rotation": 0.0, "visible": true, "ellipse": false]
     }
     
     private func newObjectLayer() -> [String: AnyObject]{
@@ -241,6 +242,9 @@ class SKATMXParser : NSObject, NSXMLParserDelegate {
                 
                 object[kPolygon] = polygons
             }
+            
+        case kEllipse:
+            object[kEllipse] = true
         
         default :
             print("unexpected name found: \(elementName)\nAttr: \(attributeDict)")
